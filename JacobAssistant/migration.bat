@@ -1,0 +1,1 @@
+dotnet ef dbcontext Scaffold "server=192.168.98.100;userid=aide;pwd=jacob_aide;port=3306;database=jacob_aide;sslmode=none;" Pomelo.EntityFrameworkCore.MySql -o Models -c AssistantDbContext

@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.JacobAssistant.iml
+# Datasource local storage ignored files
+/../../../../../../../../:\Users\zhao\RiderProjects\JacobAssistant\.idea\.idea.JacobAssistant\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

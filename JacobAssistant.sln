@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant", "JacobAssistant\JacobAssistant.csproj", "{54CD3B7C-246F-4CA2-A279-4B40CBE087E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant.Tests", "JacobAssistant.Tests\JacobAssistant.Tests.csproj", "{7988944A-ADCA-44C4-B625-F09ABDEC365C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54CD3B7C-246F-4CA2-A279-4B40CBE087E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54CD3B7C-246F-4CA2-A279-4B40CBE087E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54CD3B7C-246F-4CA2-A279-4B40CBE087E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54CD3B7C-246F-4CA2-A279-4B40CBE087E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7988944A-ADCA-44C4-B625-F09ABDEC365C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7988944A-ADCA-44C4-B625-F09ABDEC365C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7988944A-ADCA-44C4-B625-F09ABDEC365C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7988944A-ADCA-44C4-B625-F09ABDEC365C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
