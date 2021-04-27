@@ -1,5 +1,4 @@
-﻿using JacobAssistant.Bot;
-using JacobAssistant.Bot.core;
+﻿using JacobAssistant.Bot.core;
 using JacobAssistant.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +8,19 @@ namespace JacobAssistant.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private AssistantBotClient bot;
         private readonly ConfigService _configService;
+        private readonly AssistantBotClient _bot;
 
-        public BotController(AssistantBotClient bot,ConfigService configService)
+        public BotController(AssistantBotClient bot, ConfigService configService)
         {
-            this.bot = bot;
+            _bot = bot;
             _configService = configService;
         }
 
         [HttpGet("reload")]
-        public void ReloadOptions()=> bot.ReloadOptions(_configService.BotOptions());
-        
+        public void ReloadOptions()
+        {
+            _bot.ReloadOptions(_configService.BotOptions());
+        }
     }
 }
