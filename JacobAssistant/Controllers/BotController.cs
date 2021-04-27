@@ -18,10 +18,8 @@ namespace JacobAssistant.Controllers
             _configService = configService;
         }
 
-        [HttpGet]
-        public void ReloadOptions()
-        {
-            bot.ReloadOptions(_configService.BotOptions());
-        }
+        [HttpGet("reload")]
+        public void ReloadOptions()=> bot.ReloadOptions(_configService.BotOptions());
+        
     }
 }

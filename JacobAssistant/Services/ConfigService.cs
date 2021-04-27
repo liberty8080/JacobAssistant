@@ -9,9 +9,11 @@ namespace JacobAssistant.Services
     public class ConfigService
     {
         private const string DevBotTokenName = "dev_bot_token";
-        public const string ProdBotTokenName = "prod_bot_token";
-        public const string AnnounceChannelIdName = "announce_channel_id";
-        public const string AdminIdName = "admin_id";
+        private const string ProdBotTokenName = "prod_bot_token";
+        private const string AnnounceChannelIdName = "announce_channel_id";
+        private const string AdminIdName = "admin_id";
+        
+        
         private readonly AssistantDbContext _dbContext;
         private readonly bool _isDev;
 
@@ -28,17 +30,12 @@ namespace JacobAssistant.Services
 
         public Config GetConfig(string name)
         {
-            return _dbContext.Configs.FirstOrDefault(cf=>cf.Name.Equals(name));
+            return _dbContext.Configs.FirstOrDefault(config=>config.Name.Equals(name));
         }
 
         private string GetToken()
         {
-            if (_isDev)
-            {
-                return GetConfig(DevBotTokenName).Value;
-            }
-            
-            return GetConfig(ProdBotTokenName).Value;
+            return _isDev ? GetConfig(DevBotTokenName).Value : GetConfig(ProdBotTokenName).Value;
         }
 
         private long AnnounceChannel()
