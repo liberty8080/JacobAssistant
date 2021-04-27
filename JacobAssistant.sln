@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant", "JacobAssi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant.Tests", "JacobAssistant.Tests\JacobAssistant.Tests.csproj", "{7988944A-ADCA-44C4-B625-F09ABDEC365C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant.Bot", "JacobAssistant.Bot\JacobAssistant.Bot.csproj", "{77D1BFB1-6627-481B-9667-DA082BC42319}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{7988944A-ADCA-44C4-B625-F09ABDEC365C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7988944A-ADCA-44C4-B625-F09ABDEC365C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7988944A-ADCA-44C4-B625-F09ABDEC365C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77D1BFB1-6627-481B-9667-DA082BC42319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77D1BFB1-6627-481B-9667-DA082BC42319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77D1BFB1-6627-481B-9667-DA082BC42319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77D1BFB1-6627-481B-9667-DA082BC42319}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -20,7 +20,7 @@ namespace JacobAssistant.Tests.ServiceTests
         public void Can_get_item()
         {
             using var context = new AssistantDbContext();
-            var configService = new ConfigService(context);
+            var configService = new ConfigService(context,true);
             var allConfig = configService.GetAll();
             Assert.NotEmpty(allConfig);
             foreach (var config in allConfig)

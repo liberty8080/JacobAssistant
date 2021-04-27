@@ -3,5 +3,6 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.ConfigServiceTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.SqliteOrmTest.Can_get_item&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.BotTests.BotClientTest.TestClient&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

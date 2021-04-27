@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\JacobAssistant.Bot\JacobAssistant.Bot.csproj" />
       <ProjectReference Include="..\JacobAssistant\JacobAssistant.csproj" />
     </ItemGroup>
 
