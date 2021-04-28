@@ -1,6 +1,10 @@
-﻿using JacobAssistant.Bot.core;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using JacobAssistant.Bot;
 using JacobAssistant.Services;
 using Microsoft.AspNetCore.Mvc;
+using Telegram.Bot.Types;
 
 namespace JacobAssistant.Controllers
 {
@@ -18,9 +22,21 @@ namespace JacobAssistant.Controllers
         }
 
         [HttpGet("reload")]
-        public void ReloadOptions()
+        public void ReloadOptions() => _bot.ReloadOptions(_configService.BotOptions());
+
+
+        [HttpGet("sendMsg")]
+        public async Task<Message> SendMsgToJacob(string msg)
         {
-            _bot.ReloadOptions(_configService.BotOptions());
+            try
+            {
+                return await _bot.SendMessageToJacob(msg);
+                
+            }
+            catch (HttpRequestException)
+            {
+                return new Message();
+            }
         }
     }
 }

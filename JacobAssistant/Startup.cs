@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JacobAssistant.Bot;
-using JacobAssistant.Bot.core;
+using JacobAssistant.Commands;
 using JacobAssistant.Models;
 using JacobAssistant.Services;
 using Microsoft.AspNetCore.Builder;
@@ -45,6 +45,7 @@ namespace JacobAssistant
             services.AddTransient<BotOptions, BotOptions>(pro => 
                 pro.CreateScope().ServiceProvider.GetService<ConfigService>()?.BotOptions());
             services.AddSingleton<AssistantBotClient, AssistantBotClient>();
+            services.AddSingleton<SimpleCommands>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
