@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using JacobAssistant.Exceptions;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
@@ -16,7 +17,7 @@ namespace JacobAssistant.Bot
         private BotOptions Options { get; set; }
         private TelegramBotClient Client { get; set; }
 
-        public AssistantBotClient(BotOptions options,IServiceProvider provider)
+        public AssistantBotClient(BotOptions options, IServiceProvider provider)
         {
             _provider = provider;
             Options = options;
@@ -51,12 +52,34 @@ namespace JacobAssistant.Bot
         {
             if (e.Message.Text.StartsWith("/"))
             {
-                var s = e.Message.Text.Split(" ");
-                var m = MatchCommand(s[0].Replace("/", "")).ToList();
-                var method = m.First();
-                var obj = _provider.GetService(method.ReflectedType ?? throw new InvalidOperationException());
-                Debug.Assert(obj != null, "命令解析错误！");
-                method.Invoke(obj, new object[]{e,s[1..]});
+                try
+                {
+                    var s = e.Message.Text.Split(" ");
+                    var method = MatchCommand(s[0].Replace("/", ""));
+
+                    var obj = _provider.GetService(method.ReflectedType ?? throw new InvalidOperationException());
+                    Debug.Assert(obj != null, "命令解析错误！");
+                    // ReSharper disable once PossibleNullReferenceException
+                    if (method.GetCustomAttribute<Cmd>().Permission.Equals(BotPermission.Admin) &&
+                        e.Message.From.Id != Options.AdminId.Identifier)
+                    {
+                        ReplyMessage(e, "听不懂,给👴爬");
+                    }
+                    else
+                    {
+                        method.Invoke(obj, new object[] {e, s[1..]});
+                    }
+
+                }
+                catch (CommandNotFoundExceptions exceptions)
+                {
+                    if(e.Message.From.Id != Options.AdminId.Identifier) ReplyMessage(e,"command not found");
+                }
+                catch (Exception exception)
+                {
+                    ReplyMessage(e, $"命令执行失败: {e.Message.Text}");
+                    throw;
+                }
             }
             else
             {
@@ -64,14 +87,21 @@ namespace JacobAssistant.Bot
             }
         }
 
-        public static IEnumerable<MethodInfo> MatchCommand(string message)
+        public static MethodInfo MatchCommand(string message)
         {
             var method = from cls in Assembly.GetExecutingAssembly().GetTypes()
                 where cls.IsClass && cls.GetCustomAttribute<TextCommandAttribute>() != null
                 from m in cls.GetMethods()
                 where m.GetCustomAttribute<Cmd>() != null && m.GetCustomAttribute<Cmd>()?.Name == message
                 select m;
-            return method;
+            var methodInfos = method.ToList();
+            if (methodInfos.Count > 0)
+            {
+                return methodInfos.First();
+            }
+
+            throw new CommandNotFoundExceptions();
+
         }
     }
 }

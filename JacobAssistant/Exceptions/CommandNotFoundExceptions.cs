@@ -2,7 +2,7 @@
 
 namespace JacobAssistant.Exceptions
 {
-    public class CommandFormatException:Exception
+    public class CommandNotFoundExceptions:Exception
     {
         
     }

@@ -22,7 +22,7 @@ namespace JacobAssistant.Tests.BotTests
         {
             var configService = new ConfigService(new AssistantDbContext(), true);
 
-            var client = new AssistantBotClient(configService.BotOptions(),null);
+            var client = new AssistantBotClient(configService.BotOptions(), null);
             Assert.NotNull(client);
         }
 
@@ -31,10 +31,7 @@ namespace JacobAssistant.Tests.BotTests
         public void TestMatchCommand()
         {
             var msg = "help";
-            foreach (var methodInfo in AssistantBotClient.MatchCommand(msg))
-            {
-                Assert.Equal("help",methodInfo.GetCustomAttribute<Cmd>()?.Name);
-            }
+            Assert.Equal("help", AssistantBotClient.MatchCommand(msg).GetCustomAttribute<Cmd>()?.Name);
         }
     }
 }
