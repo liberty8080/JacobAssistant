@@ -12,6 +12,7 @@ namespace JacobAssistant.Services
         private const string ProdBotTokenName = "prod_bot_token";
         private const string AnnounceChannelIdName = "announce_channel_id";
         private const string AdminIdName = "admin_id";
+        private const string V2SubName = "v2sub";
         
         
         private readonly AssistantDbContext _dbContext;
@@ -22,6 +23,10 @@ namespace JacobAssistant.Services
             _dbContext = dbContext;
             _isDev = isDev;
         }
+
+        public string HostName => GetConfig("hostname").Value;
+        public string Password => GetConfig("password").Value;
+        public string Username => GetConfig("username").Value;
 
         public List<Config> GetAll()
         {
@@ -51,6 +56,11 @@ namespace JacobAssistant.Services
         public BotOptions BotOptions()
         {
             return new(GetToken(), GetAdminId(),AnnounceChannel() );
+        }
+
+        public string V2SubLink()
+        {
+            return GetConfig(V2SubName).Value;
         }
         
     }

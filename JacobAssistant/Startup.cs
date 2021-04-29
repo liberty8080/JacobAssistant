@@ -42,10 +42,11 @@ namespace JacobAssistant
                 new ConfigService(
                     provider.CreateScope().ServiceProvider.GetService<AssistantDbContext>(),
                     provider.GetService<IHostEnvironment>().IsDevelopment()));
+            services.AddSingleton<SimpleCommands>();
+
             services.AddTransient<BotOptions, BotOptions>(pro => 
                 pro.CreateScope().ServiceProvider.GetService<ConfigService>()?.BotOptions());
             services.AddSingleton<AssistantBotClient, AssistantBotClient>();
-            services.AddSingleton<SimpleCommands>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

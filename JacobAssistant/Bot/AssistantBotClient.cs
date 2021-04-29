@@ -9,6 +9,7 @@ using JacobAssistant.Exceptions;
 using log4net;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Telegram.Bot.Requests;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -19,8 +20,9 @@ namespace JacobAssistant.Bot
         private readonly IServiceProvider _provider;
         private BotOptions Options { get; set; }
         private TelegramBotClient Client { get; set; }
-        
+
         private ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
+
         public AssistantBotClient(BotOptions options, IServiceProvider provider)
         {
             _provider = provider;
@@ -51,7 +53,7 @@ namespace JacobAssistant.Bot
 
         public async Task<Message> SendMessage(ChatId chatId, string text) =>
             await Client.SendTextMessageAsync(chatId, text);
-        
+
         private void OnMessage(object sender, MessageEventArgs e)
         {
             try
@@ -60,12 +62,13 @@ namespace JacobAssistant.Bot
                 if (!e.Message.Type.Equals(MessageType.Text))
                 {
                     var options = new JsonSerializerOptions {WriteIndented = true};
-                    SendMessageToChannel(JsonSerializer.Serialize(e.Message,options));
+                    SendMessageToChannel(JsonSerializer.Serialize(e.Message, options));
                     return;
                 }
+
                 // not command
                 if (!e.Message.Text.StartsWith("/")) return;
-                
+
                 // command invoke
                 var s = e.Message.Text.Split(" ");
                 var method = MatchCommand(s[0].Replace("/", ""));
@@ -78,29 +81,30 @@ namespace JacobAssistant.Bot
                 }
                 else
                 {
-                    method.Invoke(obj, new object[] {e, s[1..]});
+                    var result = (string) method.Invoke(obj, new object[] {e, s[1..]});
+                    ReplyMessage(e, result);
                 }
-
             }
             catch (CommandNotFoundExceptions)
             {
-                if(IsAdmin(e)) ReplyMessage(e,"command not found");
+                if (IsAdmin(e)) ReplyMessage(e, "command not found");
             }
             catch (Exception exception)
             {
-                _log.Warn("Onmessage error",exception);
+                _log.Error("Onmessage error", exception);
                 var options = new JsonSerializerOptions {WriteIndented = true};
-                SendMessageToChannel(JsonSerializer.Serialize(e.Message,options));
+                SendMessageToChannel(exception.ToString());
+                SendMessageToChannel(JsonSerializer.Serialize(e.Message, options));
             }
-
         }
-        
+
 
         private static BotPermission CommandPermission(MethodInfo method)
         {
             // ReSharper disable once PossibleNullReferenceException
             return method.GetCustomAttribute<Cmd>().Permission;
         }
+
         private bool IsAdmin(MessageEventArgs e)
         {
             return e.Message.From.Id == Options.AdminId.Identifier;
@@ -108,19 +112,24 @@ namespace JacobAssistant.Bot
 
         public static MethodInfo MatchCommand(string message)
         {
-            var method = from cls in Assembly.GetExecutingAssembly().GetTypes()
-                where cls.IsClass && cls.GetCustomAttribute<TextCommandAttribute>() != null
-                from m in cls.GetMethods()
-                where m.GetCustomAttribute<Cmd>() != null && m.GetCustomAttribute<Cmd>()?.Name == message
+            var method = from m in GetCommands()
+                where m.GetCustomAttribute<Cmd>()?.Name == message
                 select m;
             var methodInfos = method.ToList();
             if (methodInfos.Count > 0)
-            {
                 return methodInfos.First();
-            }
 
             throw new CommandNotFoundExceptions();
+        }
 
+        public static IEnumerable<MethodInfo> GetCommands()
+        {
+            var methods = from cls in Assembly.GetExecutingAssembly().GetTypes()
+                where cls.IsClass && cls.GetCustomAttribute<TextCommandAttribute>() != null
+                from m in cls.GetMethods()
+                where m.GetCustomAttribute<Cmd>() != null
+                select m;
+            return methods;
         }
     }
 }

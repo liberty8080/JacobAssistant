@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using JacobAssistant.Bot;
 using JacobAssistant.Models;
 using JacobAssistant.Services;
@@ -32,6 +33,16 @@ namespace JacobAssistant.Tests.BotTests
         {
             var msg = "help";
             Assert.Equal("help", AssistantBotClient.MatchCommand(msg).GetCustomAttribute<Cmd>()?.Name);
+        }
+
+        [Fact]
+        public void TestGetCommands()
+        {
+            var commands = AssistantBotClient.GetCommands();
+            foreach (var methodInfo in commands)
+            {
+                _testOutputHelper.WriteLine(methodInfo.GetCustomAttribute<Cmd>()?.Name);
+            }
         }
     }
 }

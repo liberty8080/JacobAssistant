@@ -22,10 +22,12 @@ namespace JacobAssistant.Bot
         public string Name { get; }
         public BotPermission Permission { get; set; } = BotPermission.Admin;
         public int Order { get; set; }
+        public string Desc { get; set; }
 
         public Cmd(string name)
         {
             Name = name;
         }
+        
     }
 }
