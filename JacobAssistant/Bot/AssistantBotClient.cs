@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 using JacobAssistant.Exceptions;
+using log4net;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace JacobAssistant.Bot
 {
@@ -16,7 +19,8 @@ namespace JacobAssistant.Bot
         private readonly IServiceProvider _provider;
         private BotOptions Options { get; set; }
         private TelegramBotClient Client { get; set; }
-
+        
+        private ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
         public AssistantBotClient(BotOptions options, IServiceProvider provider)
         {
             _provider = provider;
@@ -47,44 +51,59 @@ namespace JacobAssistant.Bot
 
         public async Task<Message> SendMessage(ChatId chatId, string text) =>
             await Client.SendTextMessageAsync(chatId, text);
-
+        
         private void OnMessage(object sender, MessageEventArgs e)
         {
-            if (e.Message.Text.StartsWith("/"))
+            try
             {
-                try
+                // not text type
+                if (!e.Message.Type.Equals(MessageType.Text))
                 {
-                    var s = e.Message.Text.Split(" ");
-                    var method = MatchCommand(s[0].Replace("/", ""));
+                    var options = new JsonSerializerOptions {WriteIndented = true};
+                    SendMessageToChannel(JsonSerializer.Serialize(e.Message,options));
+                    return;
+                }
+                // not command
+                if (!e.Message.Text.StartsWith("/")) return;
+                
+                // command invoke
+                var s = e.Message.Text.Split(" ");
+                var method = MatchCommand(s[0].Replace("/", ""));
+                var obj = _provider.GetService(method.ReflectedType ?? throw new InvalidOperationException());
+                Debug.Assert(obj != null, "命令解析错误！");
+                // admin only
+                if (CommandPermission(method).Equals(BotPermission.Admin) && !IsAdmin(e))
+                {
+                    ReplyMessage(e, "听不懂,给👴爬");
+                }
+                else
+                {
+                    method.Invoke(obj, new object[] {e, s[1..]});
+                }
 
-                    var obj = _provider.GetService(method.ReflectedType ?? throw new InvalidOperationException());
-                    Debug.Assert(obj != null, "命令解析错误！");
-                    // ReSharper disable once PossibleNullReferenceException
-                    if (method.GetCustomAttribute<Cmd>().Permission.Equals(BotPermission.Admin) &&
-                        e.Message.From.Id != Options.AdminId.Identifier)
-                    {
-                        ReplyMessage(e, "听不懂,给👴爬");
-                    }
-                    else
-                    {
-                        method.Invoke(obj, new object[] {e, s[1..]});
-                    }
-
-                }
-                catch (CommandNotFoundExceptions exceptions)
-                {
-                    if(e.Message.From.Id != Options.AdminId.Identifier) ReplyMessage(e,"command not found");
-                }
-                catch (Exception exception)
-                {
-                    ReplyMessage(e, $"命令执行失败: {e.Message.Text}");
-                    throw;
-                }
             }
-            else
+            catch (CommandNotFoundExceptions)
             {
-                ReplyMessage(e, "听不懂,给👴爬");
+                if(IsAdmin(e)) ReplyMessage(e,"command not found");
             }
+            catch (Exception exception)
+            {
+                _log.Warn("Onmessage error",exception);
+                var options = new JsonSerializerOptions {WriteIndented = true};
+                SendMessageToChannel(JsonSerializer.Serialize(e.Message,options));
+            }
+
+        }
+        
+
+        private static BotPermission CommandPermission(MethodInfo method)
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            return method.GetCustomAttribute<Cmd>().Permission;
+        }
+        private bool IsAdmin(MessageEventArgs e)
+        {
+            return e.Message.From.Id == Options.AdminId.Identifier;
         }
 
         public static MethodInfo MatchCommand(string message)
