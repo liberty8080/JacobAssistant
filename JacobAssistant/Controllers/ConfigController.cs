@@ -20,14 +20,14 @@ namespace JacobAssistant.Controllers
         {
             _service = service;
         }
-        // GET: api/ConfigControlle
+        // GET: api/ConfigController
         [HttpGet]
         public IEnumerable<Config> Get()
         {
           return  _service.GetAll();
         }
 
-        // GET: api/ConfigControlle/{name}
+        // GET: api/ConfigController/{name}
         [HttpGet("{name}", Name = "Get")]
         public Config Get(String  name)
         {

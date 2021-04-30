@@ -21,7 +21,7 @@ namespace JacobAssistant.Bot
         private BotOptions Options { get; set; }
         private TelegramBotClient Client { get; set; }
 
-        private ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
+        private readonly ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
 
         public AssistantBotClient(BotOptions options, IServiceProvider provider)
         {

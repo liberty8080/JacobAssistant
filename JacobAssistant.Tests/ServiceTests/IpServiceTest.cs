@@ -21,7 +21,12 @@ namespace JacobAssistant.Tests.ServiceTests
             _testOutputHelper.WriteLine(ip);
             Assert.NotNull(ip);
         }
-        
+
+        [Fact]
+        public void WakeOnLanTest()
+        {
+            Assert.Equal(102,WakeOnLanService.WakeUp("2CF05D81E55A", 2304, "255.255.255.255"));
+        }
         
         
     }

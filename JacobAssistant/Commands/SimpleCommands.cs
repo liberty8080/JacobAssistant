@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using JacobAssistant.Bot;
@@ -7,6 +6,8 @@ using JacobAssistant.Models;
 using JacobAssistant.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Telegram.Bot.Args;
+
+// ReSharper disable UnusedMember.Global
 
 namespace JacobAssistant.Commands
 {
@@ -50,6 +51,17 @@ namespace JacobAssistant.Commands
             return new V2Service(V2SubLink()).Expire();
         }
 
+        [Cmd("wake", Order = 4, Desc = "wake on lan")]
+        public string WakeOnLan(MessageEventArgs e, params string[] args)
+        {
+            var configService = new ConfigService(new AssistantDbContext(), false);
+
+            if (WakeOnLanService.WakeUp(configService.TargetMac,2304,"255.255.255.255") == 102)
+            {
+                return "魔术包已发出";
+            }
+            return "发送失败！";
+        }
         private string V2SubLink()
         {
             using var scope = _provider.CreateScope();
@@ -58,5 +70,6 @@ namespace JacobAssistant.Commands
                 return configService.V2SubLink();
             throw new Exception("获取v2连接失败!");
         }
+        
     }
 }

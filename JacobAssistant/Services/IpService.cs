@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+﻿
 using static JacobAssistant.Services.HttpClientService;
 
 namespace JacobAssistant.Services
@@ -15,5 +15,6 @@ namespace JacobAssistant.Services
         {
             return GetAsync($"https://api.dynu.com/nic/update?hostname={hostname}&myip={GetPublicIp()}&username={username}&password={password}").GetAwaiter().GetResult();
         }
+
     }
 }

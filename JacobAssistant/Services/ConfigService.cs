@@ -27,7 +27,7 @@ namespace JacobAssistant.Services
         public string HostName => GetConfig("hostname").Value;
         public string Password => GetConfig("password").Value;
         public string Username => GetConfig("username").Value;
-
+        public string TargetMac => GetConfig("target_mac").Value;
         public List<Config> GetAll()
         {
             return _dbContext.Configs.ToList();

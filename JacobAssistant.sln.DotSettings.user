@@ -11,6 +11,7 @@
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.V2ServiceTest.V2SubDataTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.V2ServiceTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.IpServiceTest.GetIpTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.IpServiceTest.WakeOnLanTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=DDNS/@EntryIndexedValue">True</s:Boolean>
