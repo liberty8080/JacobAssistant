@@ -56,7 +56,7 @@ namespace JacobAssistant.Commands
         {
             var configService = new ConfigService(new AssistantDbContext(), false);
 
-            if (WakeOnLanService.WakeUp(configService.TargetMac,2304,"255.255.255.255") == 102)
+            if (WakeOnLanService.WakeUp(configService.TargetMac,2304,"192.168.98.255") == 102)
             {
                 return "魔术包已发出";
             }
