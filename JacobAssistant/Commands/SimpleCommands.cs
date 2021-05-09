@@ -58,7 +58,7 @@ namespace JacobAssistant.Commands
             string ip;
             ip = args.Length > 0 ? args[0] : "255.255.255.255";
             var configService = new ConfigService(new AssistantDbContext(), false);
-            return WakeOnLanService.WakeUp(configService.TargetMac, 9, ip) == 102 ? "魔术包已发出" : "发送失败！";
+            return WakeOnLanService.WakeUp(configService.TargetMac, 9, ip) == 102 ? $"魔术包已发出 ip:{ip}" : "发送失败！";
         }
 
         private string V2SubLink()
