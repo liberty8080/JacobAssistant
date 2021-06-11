@@ -19,6 +19,7 @@ namespace JacobAssistant.Models
 
         public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<ConfigType> ConfigTypes { get; set; }
+        public virtual DbSet<EmailAccount> EmailAccounts { get; set; }
         public virtual DbSet<Novel> Novels { get; set; }
         public virtual DbSet<NovelChapter> NovelChapters { get; set; }
         public virtual DbSet<NovelContent> NovelContents { get; set; }
@@ -27,7 +28,7 @@ namespace JacobAssistant.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySql("server=192.168.98.100;userid=aide;pwd=jacob_aide;port=3306;database=jacob_aide;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.FromString("8.0.22-mysql"));
             }
         }
@@ -76,6 +77,41 @@ namespace JacobAssistant.Models
                     .HasColumnName("type_name")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
+            });
+
+            modelBuilder.Entity<EmailAccount>(entity =>
+            {
+                entity.ToTable("email_account");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Email)
+                    .HasColumnType("varchar(63)")
+                    .HasColumnName("email")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Password)
+                    .HasColumnType("varchar(100)")
+                    .HasColumnName("password")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SmtpPort).HasColumnName("smtp_port");
+
+                entity.Property(e => e.SmtpServer)
+                    .HasColumnType("varchar(100)")
+                    .HasColumnName("smtp_server")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.State)
+                    .HasColumnName("state")
+                    .HasComment("状态：0（停用），1（使用中）");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasComment("邮箱类型：0（其他），1（outlook），2（gmail），3（qq)\n");
             });
 
             modelBuilder.Entity<Novel>(entity =>

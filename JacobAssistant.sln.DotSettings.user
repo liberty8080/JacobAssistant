@@ -1,4 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Net.Mail.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=384616a7_002D8bda_002D407b_002Dac3c_002D1bfc0c2d9d2f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ConfigServiceTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.ConfigServiceTest&lt;/TestId&gt;&#xD;
@@ -12,8 +15,13 @@
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.V2ServiceTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.IpServiceTest.GetIpTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.ServiceTests.IpServiceTest.WakeOnLanTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.LadderTest.FastLinkTest.GetHtml&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.LadderTest.FastLinkTest.Login&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.LadderTest.FastLinkTest.GetUser&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.LadderTest.FastLinkTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=DDNS/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=fastlink/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=vmess/@EntryIndexedValue">True</s:Boolean>
 	</wpf:ResourceDictionary>

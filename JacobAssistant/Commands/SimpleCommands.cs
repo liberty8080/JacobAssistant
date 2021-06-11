@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using JacobAssistant.Bot;
+using JacobAssistant.Ladder;
 using JacobAssistant.Models;
 using JacobAssistant.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace JacobAssistant.Commands
     public class SimpleCommands
     {
         private readonly IServiceProvider _provider;
+        private readonly ConfigService _configService = new(new AssistantDbContext(), false);
 
         public SimpleCommands(IServiceProvider provider)
         {
@@ -42,8 +44,7 @@ namespace JacobAssistant.Commands
         // ReSharper disable once InconsistentNaming
         public string DDNS(MessageEventArgs e, params string[] args)
         {
-            var configService = new ConfigService(new AssistantDbContext(), false);
-            return IpService.Ddns(configService.Username, configService.Password, configService.HostName);
+            return IpService.Ddns(_configService.Username, _configService.Password, _configService.HostName);
         }
 
         [Cmd("expire", Order = 3, Desc = "过期时间查询")]
@@ -57,8 +58,15 @@ namespace JacobAssistant.Commands
         {
             string ip;
             ip = args.Length > 0 ? args[0] : "255.255.255.255";
-            var configService = new ConfigService(new AssistantDbContext(), false);
-            return WakeOnLanService.WakeUp(configService.TargetMac, 9, ip) == 102 ? $"魔术包已发出 ip:{ip}" : "发送失败！";
+            return WakeOnLanService.WakeUp(_configService.TargetMac, 9, ip) == 102 ? $"魔术包已发出 ip:{ip}" : "发送失败！";
+        }
+
+        [Cmd("ladder", Order = 5, Desc = "fastlink")]
+        public string Ladder(MessageEventArgs e, params string[] args)
+        {
+            var fastLink = FastLink.GetInstance(_configService.GetConfig("fastlink_email").Value,
+                _configService.GetConfig("fastlink_passwd").Value);
+            return fastLink.GetInfo();
         }
 
         private string V2SubLink()

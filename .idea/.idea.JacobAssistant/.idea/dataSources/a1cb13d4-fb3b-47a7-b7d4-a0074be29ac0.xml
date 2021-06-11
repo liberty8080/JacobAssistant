@@ -971,158 +971,197 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </user>
     <table id="286" parent="3" name="config"/>
     <table id="287" parent="3" name="config_type"/>
-    <table id="288" parent="3" name="novel">
+    <table id="288" parent="3" name="email_account"/>
+    <table id="289" parent="3" name="novel">
       <Comment>小说表</Comment>
     </table>
-    <table id="289" parent="3" name="novel_chapter"/>
-    <table id="290" parent="3" name="novel_content"/>
-    <column id="291" parent="286" name="id">
+    <table id="290" parent="3" name="novel_chapter"/>
+    <table id="291" parent="3" name="novel_content"/>
+    <column id="292" parent="286" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="292" parent="286" name="name">
+    <column id="293" parent="286" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="293" parent="286" name="value">
+    <column id="294" parent="286" name="value">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="294" parent="286" name="type">
+    <column id="295" parent="286" name="type">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="295" parent="287" name="id">
+    <column id="296" parent="287" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="296" parent="287" name="type_name">
+    <column id="297" parent="287" name="type_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="297" parent="287" name="comment">
+    <column id="298" parent="287" name="comment">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="298" parent="288" name="id">
+    <column id="299" parent="288" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="299" parent="288" name="raw_id">
+    <column id="300" parent="288" name="email">
       <Position>2</Position>
-      <Comment>来源网站的小说id</Comment>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(63)|0s</DataType>
     </column>
-    <column id="300" parent="288" name="novel_name">
+    <column id="301" parent="288" name="password">
       <Position>3</Position>
-      <Comment>小说名称</Comment>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="301" parent="288" name="data_source">
+    <column id="302" parent="288" name="state">
       <Position>4</Position>
-      <Comment>来源网站</Comment>
-      <DataType>varchar(255)|0s</DataType>
+      <Comment>状态：0（停用），1（使用中）</Comment>
+      <DataType>int|0s</DataType>
     </column>
-    <column id="302" parent="288" name="brief">
+    <column id="303" parent="288" name="type">
       <Position>5</Position>
-      <Comment>简介</Comment>
-      <DataType>varchar(2000)|0s</DataType>
+      <Comment>邮箱类型：0（其他），1（outlook），2（gmail），3（qq)
+</Comment>
+      <DataType>int|0s</DataType>
     </column>
-    <column id="303" parent="288" name="cover">
+    <column id="304" parent="288" name="smtp_server">
       <Position>6</Position>
-      <Comment>封面</Comment>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="304" parent="288" name="author">
+    <column id="305" parent="288" name="smtp_port">
       <Position>7</Position>
-      <Comment>作者</Comment>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
-    <column id="305" parent="288" name="raw_url">
-      <Position>8</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="306" parent="288" name="create_time">
-      <Position>9</Position>
-      <DataType>datetime|0s</DataType>
-    </column>
-    <column id="307" parent="288" name="update_time">
-      <Position>10</Position>
-      <DataType>datetime|0s</DataType>
-    </column>
-    <key id="308" parent="288" name="PRIMARY">
+    <key id="306" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="309" parent="289" name="id">
+    <column id="307" parent="289" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="310" parent="289" name="novel_id">
+    <column id="308" parent="289" name="raw_id">
       <Position>2</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <column id="311" parent="289" name="chapter_name">
-      <Position>3</Position>
+      <Comment>来源网站的小说id</Comment>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="312" parent="289" name="content_id">
+    <column id="309" parent="289" name="novel_name">
+      <Position>3</Position>
+      <Comment>小说名称</Comment>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="310" parent="289" name="data_source">
       <Position>4</Position>
-      <DataType>int|0s</DataType>
+      <Comment>来源网站</Comment>
+      <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="313" parent="289" name="create_time">
+    <column id="311" parent="289" name="brief">
       <Position>5</Position>
-      <DataType>datetime|0s</DataType>
+      <Comment>简介</Comment>
+      <DataType>varchar(2000)|0s</DataType>
     </column>
-    <column id="314" parent="289" name="update_time">
+    <column id="312" parent="289" name="cover">
       <Position>6</Position>
+      <Comment>封面</Comment>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="313" parent="289" name="author">
+      <Position>7</Position>
+      <Comment>作者</Comment>
+      <DataType>varchar(20)|0s</DataType>
+    </column>
+    <column id="314" parent="289" name="raw_url">
+      <Position>8</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="315" parent="289" name="create_time">
+      <Position>9</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <index id="315" parent="289" name="novel_chapter_novel_id_fk">
-      <ColNames>novel_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="316" parent="289" name="novel_chapter_novel_content_id_fk">
-      <ColNames>content_id</ColNames>
-      <Type>btree</Type>
-    </index>
+    <column id="316" parent="289" name="update_time">
+      <Position>10</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
     <key id="317" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="318" parent="289" name="novel_chapter_novel_id_fk">
-      <ColNames>novel_id</ColNames>
-      <RefTableName>novel</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="319" parent="289" name="novel_chapter_novel_content_id_fk">
-      <ColNames>content_id</ColNames>
-      <RefTableName>novel_content</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="320" parent="290" name="id">
+    <column id="318" parent="290" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="321" parent="290" name="raw_content">
+    <column id="319" parent="290" name="novel_id">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="320" parent="290" name="chapter_name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="321" parent="290" name="content_id">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="322" parent="290" name="create_time">
+      <Position>5</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="323" parent="290" name="update_time">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <index id="324" parent="290" name="novel_chapter_novel_id_fk">
+      <ColNames>novel_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="325" parent="290" name="novel_chapter_novel_content_id_fk">
+      <ColNames>content_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="326" parent="290" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="327" parent="290" name="novel_chapter_novel_id_fk">
+      <ColNames>novel_id</ColNames>
+      <RefTableName>novel</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="328" parent="290" name="novel_chapter_novel_content_id_fk">
+      <ColNames>content_id</ColNames>
+      <RefTableName>novel_content</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="329" parent="291" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="330" parent="291" name="raw_content">
       <Position>2</Position>
       <Comment>未经处理的原始数据</Comment>
       <DataType>text|0s</DataType>
     </column>
-    <column id="322" parent="290" name="content">
+    <column id="331" parent="291" name="content">
       <Position>3</Position>
       <Comment>处理好的纯文字内容</Comment>
       <DataType>text|0s</DataType>
     </column>
-    <key id="323" parent="290" name="PRIMARY">
+    <key id="332" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
