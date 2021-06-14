@@ -22,7 +22,7 @@ namespace JacobAssistant.Tests.ServiceTests
         [Fact]
         public void V2SubDataTest()
         {
-            V2Service service= new V2Service(_configService.V2SubLink());
+            var service= new V2Service(_configService.V2SubLink());
             Assert.NotNull(service.GetV2Sub());
             foreach (var vmess in service.DecryptSub(service.GetV2Sub()))
             {
@@ -33,7 +33,7 @@ namespace JacobAssistant.Tests.ServiceTests
         [Fact]
         public void ExpireTest()
         {
-            V2Service service= new V2Service(_configService.V2SubLink());
+            var service= new V2Service(_configService.V2SubLink());
             Assert.Contains("过期", service.Expire());
         }
     }
