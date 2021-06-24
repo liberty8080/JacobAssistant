@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using JacobAssistant.Bot;
 using JacobAssistant.Commands;
+using JacobAssistant.Email;
 using JacobAssistant.Models;
+using JacobAssistant.ScheduleTask;
 using JacobAssistant.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,11 +14,15 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Spi;
 
 namespace JacobAssistant
 {
@@ -47,6 +53,15 @@ namespace JacobAssistant
             services.AddTransient<BotOptions, BotOptions>(pro => 
                 pro.CreateScope().ServiceProvider.GetService<ConfigService>()?.BotOptions());
             services.AddSingleton<AssistantBotClient, AssistantBotClient>();
+            
+            services.AddScoped<EmailAccountService>();
+            services.AddSingleton(provider => new EmailHandler(provider.GetService<AssistantBotClient>()
+                , provider.CreateScope().ServiceProvider.GetService<EmailAccountService>()));
+            services.AddSingleton<IJobFactory,SingletonJobFactory>();
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+            services.AddSingleton<EmailJob>();
+            services.AddSingleton(new JobSchedule(typeof(EmailJob), "0 0/5 * * * ? *"));
+            services.AddHostedService<QuartzHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

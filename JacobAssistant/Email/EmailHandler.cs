@@ -1,27 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using JacobAssistant.Bot;
 using JacobAssistant.Models;
+using JacobAssistant.Services;
+using MimeKit;
 
 namespace JacobAssistant.Email
 {
-    public class BaseEmailHandler:IEmailHandler
+    public class EmailHandler
     {
-        private List<EmailAccount> _accounts = new(); 
-        public void AddEmailAccount(EmailAccount emailAccount)
+        private readonly AssistantBotClient _bot;
+        private readonly EmailAccountService _service;
+        private List<string> _messages = new();
+        public EmailHandler(AssistantBotClient bot,EmailAccountService service)
         {
-            _accounts.Add(emailAccount);
+            _bot = bot;
+            _service = service;
         }
 
-        public void ReceiveUpdates()
+        public void GetUnreadMails()
         {
-            foreach (var emailAccount in _accounts)
+            var accounts = _service.EmailAccounts();
+            Console.WriteLine(accounts.Count);
+            foreach (var emailAccount in accounts)
             {
-
+                using var client = EmailClient(emailAccount);
+                var unread =client.UnreadMails();
+                foreach (var u in unread.Where(u => !_messages.Contains(u.MessageId)))
+                {
+                    var announce = $"标题:{u.Subject}\n发件人:{u.From}\n";
+                    _bot.SendMessageToChannel(announce);
+                    _messages.Add(u.MessageId);
+                }
+                
             }
         }
 
-        public void OnUpdate()
+        private static CustomEmailImapClient EmailClient(EmailAccount account)
         {
-            throw new System.NotImplementedException();
+            return account.Type switch
+            {
+                1 => new OutlookClient {Username = account.Email, Passwd = account.Password},
+                2 => new GmailClient {Username = account.Email, Passwd = account.Password},
+                _ => null
+            };
         }
     }
 }
