@@ -13,7 +13,8 @@ namespace JacobAssistant.Email
         private readonly AssistantBotClient _bot;
         private readonly EmailAccountService _service;
         private List<string> _messages = new();
-        public EmailHandler(AssistantBotClient bot,EmailAccountService service)
+
+        public EmailHandler(AssistantBotClient bot, EmailAccountService service)
         {
             _bot = bot;
             _service = service;
@@ -26,14 +27,13 @@ namespace JacobAssistant.Email
             foreach (var emailAccount in accounts)
             {
                 using var client = EmailClient(emailAccount);
-                var unread =client.UnreadMails();
+                var unread = client.UnreadMails();
                 foreach (var u in unread.Where(u => !_messages.Contains(u.MessageId)))
                 {
                     var announce = $"标题:{u.Subject}\n发件人:{u.From}\n";
                     _bot.SendMessageToChannel(announce);
                     _messages.Add(u.MessageId);
                 }
-                
             }
         }
 

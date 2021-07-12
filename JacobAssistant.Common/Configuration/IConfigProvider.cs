@@ -8,7 +8,6 @@ namespace JacobAssistant.Common.Configuration
     /// </summary>
     public interface IConfigProvider
     {
-        
         ISettingsManager Manager { get; set; }
 
         /// <summary>
@@ -23,6 +22,5 @@ namespace JacobAssistant.Common.Configuration
         /// <param name="name">配置的原始名称</param>
         /// <returns></returns>
         Config GetConfig(string name);
-
     }
 }

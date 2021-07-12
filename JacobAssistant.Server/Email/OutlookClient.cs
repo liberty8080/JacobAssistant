@@ -2,7 +2,7 @@
 
 namespace JacobAssistant.Email
 {
-    public class OutlookClient:CustomEmailImapClient
+    public class OutlookClient : CustomEmailImapClient
     {
         public OutlookClient()
         {
@@ -10,9 +10,5 @@ namespace JacobAssistant.Email
             Port = 993;
             UseSsl = true;
         }
-        
-        
-        
-        
     }
 }

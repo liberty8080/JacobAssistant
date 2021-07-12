@@ -17,6 +17,7 @@ namespace JacobAssistant.Services
         {
             _subLink = subLink;
         }
+
         public string GetV2Sub()
         {
             return GetAsync(_subLink).GetAwaiter().GetResult();
@@ -32,7 +33,7 @@ namespace JacobAssistant.Services
 
         public List<VMessEntity> DecryptSub(string subData)
         {
-            var base64EncodedBytes  = Convert.FromBase64String(subData);
+            var base64EncodedBytes = Convert.FromBase64String(subData);
             var vMesses = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
             var vMessEntities = new List<VMessEntity>();
             foreach (var vMess in vMesses.Split("\n"))
@@ -42,12 +43,9 @@ namespace JacobAssistant.Services
                 var vMessJson = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(temp));
                 var obj = JsonSerializer.Deserialize<VMessEntity>(vMessJson);
                 vMessEntities.Add(obj);
-
             }
+
             return vMessEntities;
         }
-        
-        
-        
     }
 }

@@ -26,8 +26,10 @@ namespace JacobAssistant.Common.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=192.168.98.100;userid=aide;pwd=jacob_aide;port=3306;database=jacob_aide;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.FromString("8.0.22-mysql"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySql(
+                    "server=192.168.98.100;userid=aide;pwd=jacob_aide;port=3306;database=jacob_aide;sslmode=none",
+                    Microsoft.EntityFrameworkCore.ServerVersion.FromString("8.0.22-mysql"));
             }
         }
 

@@ -7,7 +7,7 @@ namespace JacobAssistant.Services
     public class EmailAccountService
     {
         private AssistantDbContext _context;
-        
+
         public EmailAccountService()
         {
             _context = new AssistantDbContext();
@@ -20,7 +20,7 @@ namespace JacobAssistant.Services
 
         public List<EmailAccount> EmailAccounts()
         {
-          return  _context.EmailAccounts.ToList();
+            return _context.EmailAccounts.ToList();
         }
 
         public EmailAccount GetAOutlook()
@@ -32,7 +32,5 @@ namespace JacobAssistant.Services
         {
             return _context.EmailAccounts.FirstOrDefault(account => account.State == 1 && account.Type == 2);
         }
-        
-        
     }
 }

@@ -7,21 +7,23 @@ using Quartz.Spi;
 
 namespace JacobAssistant.ScheduleTask
 {
-    public class QuartzHostedService:IHostedService
+    public class QuartzHostedService : IHostedService
     {
         private readonly ISchedulerFactory _schedulerFactory;
         private readonly IJobFactory _jobFactory;
         private readonly IEnumerable<JobSchedule> _jobSchedules;
 
-        public QuartzHostedService(ISchedulerFactory schedulerFactory, IJobFactory jobFactory, IEnumerable<JobSchedule> jobSchedules)
+        public QuartzHostedService(ISchedulerFactory schedulerFactory, IJobFactory jobFactory,
+            IEnumerable<JobSchedule> jobSchedules)
         {
             _schedulerFactory = schedulerFactory;
             _jobFactory = jobFactory;
             _jobSchedules = jobSchedules;
         }
-        
-        
+
+
         public IScheduler Scheduler { get; set; }
+
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             Scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
@@ -33,6 +35,7 @@ namespace JacobAssistant.ScheduleTask
                 await Scheduler.ScheduleJob(job, trigger, cancellationToken);
                 jobSchedule.JobStatus = JobStatus.Scheduling;
             }
+
             await Scheduler.Start(cancellationToken);
             foreach (var jobSchedule in _jobSchedules)
             {
@@ -45,12 +48,11 @@ namespace JacobAssistant.ScheduleTask
             await Scheduler?.Shutdown(cancellationToken);
             foreach (var jobSchedule in _jobSchedules)
             {
-             
                 jobSchedule.JobStatus = JobStatus.Stopped;
             }
         }
-        
-        
+
+
         private static IJobDetail CreateJob(JobSchedule schedule)
         {
             var jobType = schedule.JobType;
@@ -60,8 +62,8 @@ namespace JacobAssistant.ScheduleTask
                 .WithDescription(jobType.Name)
                 .Build();
         }
-        
-        
+
+
         private static ITrigger CreateTrigger(JobSchedule schedule)
         {
             return TriggerBuilder

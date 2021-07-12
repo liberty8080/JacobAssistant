@@ -2,16 +2,14 @@
 
 namespace JacobAssistant.Exceptions
 {
-    public class FastLinkLoginFailedException:Exception
+    public class FastLinkLoginFailedException : Exception
     {
-        public FastLinkLoginFailedException():base()
+        public FastLinkLoginFailedException() : base()
         {
-            
         }
 
-        public FastLinkLoginFailedException(string message):base(message)
+        public FastLinkLoginFailedException(string message) : base(message)
         {
-            
         }
     }
 }

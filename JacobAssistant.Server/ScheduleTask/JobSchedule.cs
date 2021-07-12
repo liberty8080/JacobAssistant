@@ -16,20 +16,15 @@ namespace JacobAssistant.ScheduleTask
             CronExpression = cronExpression;
         }
     }
-    
+
     /// <summary>
     /// Job运行状态
     /// </summary>
-    public enum JobStatus:byte
+    public enum JobStatus : byte
     {
-        [Description("初始化")]
-        Init=0,
-        [Description("运行中")]
-        Running=1,
-        [Description("调度中")]
-        Scheduling = 2,
-        [Description("已停止")]
-        Stopped = 3,
-
+        [Description("初始化")] Init = 0,
+        [Description("运行中")] Running = 1,
+        [Description("调度中")] Scheduling = 2,
+        [Description("已停止")] Stopped = 3,
     }
 }

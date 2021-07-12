@@ -31,7 +31,6 @@ namespace JacobAssistant.Controllers
             try
             {
                 return await _bot.SendMessageToJacob(msg);
-                
             }
             catch (HttpRequestException)
             {

@@ -3,9 +3,8 @@ using JacobAssistant.Common.Models;
 
 namespace JacobAssistant.Common.Configuration
 {
-    public class RedisSettingManager:ISettingsManager
+    public class RedisSettingManager : ISettingsManager
     {
-        
         public IEnumerable<Config> GetAllConfigs()
         {
             throw new System.NotImplementedException();
@@ -20,6 +19,5 @@ namespace JacobAssistant.Common.Configuration
         {
             throw new System.NotImplementedException();
         }
-
     }
 }

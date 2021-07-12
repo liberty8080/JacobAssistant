@@ -15,6 +15,7 @@ namespace JacobAssistant.Tests.Common
         {
             _provider = new RedisConfigurationProvider("192.168.1.12:6379");
         }
+
         [Test]
         public void ProviderTest()
         {
@@ -24,15 +25,13 @@ namespace JacobAssistant.Tests.Common
         [Test]
         public void TryGetAndSetTest()
         {
-            _provider.TryGet(ConfigMapping.TelegramDevBotToken,out var originalValue);
+            _provider.TryGet(ConfigMapping.TelegramDevBotToken, out var originalValue);
             Console.WriteLine($"originalValue:{originalValue}");
-            _provider.Set(ConfigMapping.TelegramDevBotToken,"test");
+            _provider.Set(ConfigMapping.TelegramDevBotToken, "test");
             _provider.TryGet(ConfigMapping.TelegramDevBotToken, out var testValue);
             Console.WriteLine($"TestValue: {testValue}");
             Assert.AreEqual("test", testValue);
-            _provider.Set(ConfigMapping.TelegramDevBotToken,originalValue);
+            _provider.Set(ConfigMapping.TelegramDevBotToken, originalValue);
         }
-
-        
     }
 }

@@ -44,20 +44,20 @@ namespace JacobAssistant
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "JacobAssistant.Server", Version = "v1"});
             });
             services.AddDbContext<AssistantDbContext>();
-            services.AddScoped<ConfigService,ConfigService>(provider => 
+            services.AddScoped<ConfigService, ConfigService>(provider =>
                 new ConfigService(
                     provider.CreateScope().ServiceProvider.GetService<AssistantDbContext>(),
                     provider.GetService<IHostEnvironment>().IsDevelopment()));
             services.AddSingleton<SimpleCommands>();
 
-            services.AddTransient<BotOptions, BotOptions>(pro => 
+            services.AddTransient<BotOptions, BotOptions>(pro =>
                 pro.CreateScope().ServiceProvider.GetService<ConfigService>()?.BotOptions());
             services.AddSingleton<AssistantBotClient, AssistantBotClient>();
-            
+
             services.AddScoped<EmailAccountService>();
             services.AddSingleton(provider => new EmailHandler(provider.GetService<AssistantBotClient>()
                 , provider.CreateScope().ServiceProvider.GetService<EmailAccountService>()));
-            services.AddSingleton<IJobFactory,SingletonJobFactory>();
+            services.AddSingleton<IJobFactory, SingletonJobFactory>();
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             services.AddSingleton<EmailJob>();
             services.AddSingleton(new JobSchedule(typeof(EmailJob), "0 0/5 * * * ? *"));
@@ -65,7 +65,7 @@ namespace JacobAssistant
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,AssistantBotClient client)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AssistantBotClient client)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +84,5 @@ namespace JacobAssistant
             // 启动Bot
             client.Start();
         }
-        
     }
 }

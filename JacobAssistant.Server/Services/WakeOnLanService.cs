@@ -2,24 +2,28 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
+
 namespace JacobAssistant.Services
 {
     public class WakeOnLanService
     {
-        
         public static int WakeUp(string mac, int port, string ip)
         {
             byte[] magicBytes = GetMagicPacket(mac);
-            IPEndPoint point = new IPEndPoint(GetOrCheckIp(ip), port);//广播模式:255.255.255.255
+            IPEndPoint point = new IPEndPoint(GetOrCheckIp(ip), port); //广播模式:255.255.255.255
             try
             {
                 UdpClient client = new UdpClient();
                 return client.Send(magicBytes, magicBytes.Length, point);
             }
-            catch (SocketException e) { /*MessageBox.Show(e.Message);*/ }
+            catch (SocketException e)
+            {
+                /*MessageBox.Show(e.Message);*/
+            }
+
             return -100;
         }
-        
+
         /// <summary>
         /// 字符串转16进制字节数组
         /// </summary>
@@ -35,7 +39,7 @@ namespace JacobAssistant.Services
                 returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
             return returnBytes;
         }
-        
+
         private static byte[] GetMagicPacket(string macString)
         {
             byte[] returnBytes = new byte[102];
@@ -47,18 +51,20 @@ namespace JacobAssistant.Services
             {
                 returnBytes[i] = macBytes[i % 6];
             }
+
             return returnBytes;
         }
 
         private static IPAddress GetOrCheckIp(string hostOrIp)
         {
-            IPAddress IPA; 
+            IPAddress IPA;
             if (!IPAddress.TryParse(hostOrIp, out IPA))
             {
                 //IPHostEntry host = Dns.GetHostByName(HostOrIP);
                 IPHostEntry host = Dns.GetHostEntry(hostOrIp ?? string.Empty);
                 IPA = host.AddressList[0];
             }
+
             return IPA;
         }
     }

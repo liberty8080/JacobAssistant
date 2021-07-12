@@ -10,7 +10,7 @@ namespace JacobAssistant.Tests.Common
         [Test]
         public void AllConfigKeys()
         {
-            Assert.Contains("Telegram_DevBotToken",ConfigMapping.AllConfigKeys());
+            Assert.Contains("Telegram_DevBotToken", ConfigMapping.AllConfigKeys());
         }
     }
 }

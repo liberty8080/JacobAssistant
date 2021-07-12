@@ -3,7 +3,7 @@ using MailKit.Security;
 
 namespace JacobAssistant.Email
 {
-    public class GmailClient:CustomEmailImapClient
+    public class GmailClient : CustomEmailImapClient
     {
         public GmailClient()
         {
@@ -15,9 +15,7 @@ namespace JacobAssistant.Email
 
         public new void Connect()
         {
-            base.Connect(Host,Port,SecureSocketOptions.SslOnConnect);
+            base.Connect(Host, Port, SecureSocketOptions.SslOnConnect);
         }
-        
-        
     }
 }

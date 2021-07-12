@@ -13,12 +13,12 @@ namespace JacobAssistant.Services
         private const string AnnounceChannelIdName = "announce_channel_id";
         private const string AdminIdName = "admin_id";
         private const string V2SubName = "v2sub";
-        
-        
+
+
         private readonly AssistantDbContext _dbContext;
         private readonly bool _isDev;
 
-        public ConfigService(AssistantDbContext dbContext,bool isDev)
+        public ConfigService(AssistantDbContext dbContext, bool isDev)
         {
             _dbContext = dbContext;
             _isDev = isDev;
@@ -28,6 +28,7 @@ namespace JacobAssistant.Services
         public string Password => GetConfig("password").Value;
         public string Username => GetConfig("username").Value;
         public string TargetMac => GetConfig("target_mac").Value;
+
         public List<Config> GetAll()
         {
             return _dbContext.Configs.ToList();
@@ -35,7 +36,7 @@ namespace JacobAssistant.Services
 
         public Config GetConfig(string name)
         {
-            return _dbContext.Configs.FirstOrDefault(config=>config.Name.Equals(name));
+            return _dbContext.Configs.FirstOrDefault(config => config.Name.Equals(name));
         }
 
         private string GetToken()
@@ -55,13 +56,12 @@ namespace JacobAssistant.Services
 
         public BotOptions BotOptions()
         {
-            return new(GetToken(), GetAdminId(),AnnounceChannel() );
+            return new(GetToken(), GetAdminId(), AnnounceChannel());
         }
 
         public string V2SubLink()
         {
             return GetConfig(V2SubName).Value;
         }
-        
     }
 }

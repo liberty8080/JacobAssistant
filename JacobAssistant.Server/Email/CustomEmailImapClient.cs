@@ -9,7 +9,7 @@ using MimeKit;
 
 namespace JacobAssistant.Email
 {
-    public class CustomEmailImapClient:ImapClient
+    public class CustomEmailImapClient : ImapClient
     {
         protected string Host { get; set; }
         protected int Port { get; set; }
@@ -20,12 +20,12 @@ namespace JacobAssistant.Email
 
         public void Connect()
         {
-            base.Connect(Host,Port,UseSsl);
+            base.Connect(Host, Port, UseSsl);
         }
 
         public void Auth()
         {
-            Authenticate(Username,Passwd);
+            Authenticate(Username, Passwd);
         }
 
         public List<MimeMessage> UnreadMails()
@@ -33,7 +33,7 @@ namespace JacobAssistant.Email
             Connect();
             if (!IsAuthenticated)
             {
-                Authenticate(Username,Passwd);
+                Authenticate(Username, Passwd);
             }
 
             Inbox.Open(FolderAccess.ReadOnly);
@@ -43,7 +43,5 @@ namespace JacobAssistant.Email
             Disconnect(true);
             return unread;
         }
-        
-        
     }
 }

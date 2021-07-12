@@ -5,7 +5,7 @@ using Quartz.Spi;
 
 namespace JacobAssistant.ScheduleTask
 {
-    public class SingletonJobFactory:IJobFactory
+    public class SingletonJobFactory : IJobFactory
     {
         private readonly IServiceProvider _provider;
 
@@ -13,6 +13,7 @@ namespace JacobAssistant.ScheduleTask
         {
             _provider = provider ?? throw new ArgumentNullException();
         }
+
         public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
         {
             return _provider.GetRequiredService(bundle.JobDetail.JobType) as IJob;
@@ -20,7 +21,6 @@ namespace JacobAssistant.ScheduleTask
 
         public void ReturnJob(IJob job)
         {
-            
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿
-
-// ReSharper disable UnusedMember.Global
+﻿// ReSharper disable UnusedMember.Global
 
 using JacobAssistant.Bots.TelegramBots;
 

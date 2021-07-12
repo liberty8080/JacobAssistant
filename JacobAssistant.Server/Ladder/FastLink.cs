@@ -16,7 +16,7 @@ namespace JacobAssistant.Ladder
         private readonly string _passwd;
         private static FastLink _instance;
         private static readonly object Locker = new();
-        
+
         private readonly HttpClient _client = new(new HttpClientHandler
         {
             AllowAutoRedirect = true,
@@ -29,8 +29,8 @@ namespace JacobAssistant.Ladder
             _passwd = passwd;
             AddHeaders();
         }
-        
-        
+
+
         public void GetUserPage()
         {
             var result = _client.GetAsync(UserPage).Result.Content.ReadAsStringAsync().Result;
@@ -65,7 +65,6 @@ namespace JacobAssistant.Ladder
             {
                 throw new FastLinkLoginFailedException(loginRes);
             }
-
         }
 
         public string GetInfo()
@@ -82,6 +81,7 @@ namespace JacobAssistant.Ladder
         {
             return GetFlow(_userPageContent);
         }
+
         public string GetFlow(string content)
         {
             var htmlDoc = new HtmlDocument();
@@ -89,7 +89,7 @@ namespace JacobAssistant.Ladder
             var flow = htmlDoc.DocumentNode
                 .SelectSingleNode("//h4[contains(text(),\"剩余流量\")]/../../div[@class='card-body']")
                 .InnerText.Trim();
-            
+
             var match = Regex.Match(flow, @"\d+.\d+\s[(GB)(MB)]");
             if (match.Success)
             {
@@ -107,6 +107,7 @@ namespace JacobAssistant.Ladder
         {
             return GetExpireTime(_userPageContent);
         }
+
         public string GetExpireTime(string content)
         {
             var htmlDoc = new HtmlDocument();
@@ -114,7 +115,7 @@ namespace JacobAssistant.Ladder
             var expireTime = htmlDoc.DocumentNode
                 .SelectSingleNode("//h4[contains(text(),\"会员时长\")]/../../div[@class='card-body']")
                 .InnerText.Trim();
-            
+
             var match = Regex.Match(expireTime, @"\d+\s天");
             if (match.Success)
             {
@@ -124,7 +125,7 @@ namespace JacobAssistant.Ladder
             throw new Exception($"时间获取失败:{expireTime}");
         }
 
-        public static FastLink GetInstance(string email,string passwd)
+        public static FastLink GetInstance(string email, string passwd)
         {
             if (_instance == null)
             {

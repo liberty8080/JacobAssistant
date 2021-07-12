@@ -17,10 +17,7 @@ namespace JacobAssistant
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((_, builder) =>
-                {
-                    builder.AddMyConfiguration();
-                })
+                .ConfigureAppConfiguration((_, builder) => { builder.AddMyConfiguration(); })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }
