@@ -1,5 +1,7 @@
 ﻿using System;
+using JacobAssistant.Configuration;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.VisualBasic;
 
 namespace JacobAssistant.Extension
@@ -17,11 +19,12 @@ namespace JacobAssistant.Extension
             
             Console.WriteLine(redis);
             Console.WriteLine(mysql);
-            /*if (!string.IsNullOrEmpty(redis))
+            if (!string.IsNullOrEmpty(redis))
             {
-               return builder.Add();
+               return builder.Add(new RedisConfigurationSource(redis));
             }
 
+            /*
             if (!string.IsNullOrEmpty(mysql))
                 return builder.Add();*/
             

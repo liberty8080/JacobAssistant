@@ -6,6 +6,8 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigMappingTest.AllConfigKeys&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.ProviderTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetAndSetTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=384616a7_002D8bda_002D407b_002Dac3c_002D1bfc0c2d9d2f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConfigServiceTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
