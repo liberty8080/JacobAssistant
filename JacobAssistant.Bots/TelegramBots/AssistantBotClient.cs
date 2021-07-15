@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using JacobAssistant.Bots.Exceptions;
-using log4net;
+// using log4net;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
@@ -16,9 +16,9 @@ namespace JacobAssistant.Bots.TelegramBots
 {
     public class AssistantBotClient
     {
-        private readonly ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
+        // private readonly ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
         private readonly IServiceProvider _provider;
-
+//todo: 用新api替换
         public AssistantBotClient(BotOptions options, IServiceProvider provider)
         {
             _provider = provider;
@@ -100,7 +100,7 @@ namespace JacobAssistant.Bots.TelegramBots
             }
             catch (Exception exception)
             {
-                _log.Error("Onmessage error", exception);
+                // _log.Error("Onmessage error", exception);
                 var options = new JsonSerializerOptions {WriteIndented = true};
                 SendMessageToChannel(exception.ToString());
                 SendMessageToChannel(JsonSerializer.Serialize(e.Message, options));
