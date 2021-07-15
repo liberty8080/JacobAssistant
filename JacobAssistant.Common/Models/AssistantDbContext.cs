@@ -34,7 +34,7 @@ namespace JacobAssistant.Common.Models
             
             if (!string.IsNullOrEmpty(_connStr))
             {
-                optionsBuilder.UseMySql(_connStr, ServerVersion.FromString("8.0.22-mysql"));
+                optionsBuilder.UseMySql(_connStr, ServerVersion.Parse("8.0.22-mysql"));
             }
             else
             {

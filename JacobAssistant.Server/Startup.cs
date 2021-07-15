@@ -8,6 +8,7 @@ using JacobAssistant.ScheduleTask;
 using JacobAssistant.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,7 +18,6 @@ using Quartz.Impl;
 using Quartz.Spi;
 using Serilog;
 using Serilog.Events;
-using TelegramSink;
 
 namespace JacobAssistant
 {
@@ -38,7 +38,8 @@ namespace JacobAssistant
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "JacobAssistant.Server", Version = "v1"});
             });
-            services.AddDbContext<AssistantDbContext>();
+            //todo: make it flexible
+            services.AddDbContext<AssistantDbContext>(options=> options.UseMySql(ServerVersion.Parse("")) );
             services.AddScoped<ConfigService, ConfigService>(provider =>
                 new ConfigService(
                     provider.CreateScope().ServiceProvider.GetService<AssistantDbContext>(),
