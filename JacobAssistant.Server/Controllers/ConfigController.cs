@@ -14,7 +14,7 @@ namespace JacobAssistant.Controllers
     [ApiController]
     public class ConfigController : ControllerBase
     {
-        private readonly ConfigService _service;
+        /*private readonly ConfigService _service;
 
         public ConfigController(ConfigService service)
         {
@@ -33,6 +33,6 @@ namespace JacobAssistant.Controllers
         public Config Get(String name)
         {
             return _service.GetConfig(name);
-        }
+        }*/
     }
 }

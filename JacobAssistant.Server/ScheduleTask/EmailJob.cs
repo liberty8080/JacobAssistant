@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using JacobAssistant.Email;
 using JacobAssistant.Services;
 using Quartz;
+using Serilog;
 
 namespace JacobAssistant.ScheduleTask
 {
@@ -18,7 +19,6 @@ namespace JacobAssistant.ScheduleTask
         public Task Execute(IJobExecutionContext context)
         {
             _handler.GetUnreadMails();
-            Console.WriteLine("执行");
             return Task.CompletedTask;
         }
     }

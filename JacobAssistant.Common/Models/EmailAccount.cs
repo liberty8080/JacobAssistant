@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace JacobAssistant.Common.Models
+﻿namespace JacobAssistant.Common.Models
 {
     public partial class EmailAccount
     {
@@ -9,7 +7,5 @@ namespace JacobAssistant.Common.Models
         public string Password { get; set; }
         public int? State { get; set; }
         public int? Type { get; set; }
-        public string SmtpServer { get; set; }
-        public int? SmtpPort { get; set; }
     }
 }

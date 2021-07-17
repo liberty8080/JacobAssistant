@@ -17,17 +17,19 @@ namespace JacobAssistant.Extension
             var tempConfig = builder.Build();
             var redis = tempConfig["ConfigurationSource:Redis"];
             var mysql = tempConfig["ConfigurationSource:Mysql"];
+            
+            if (!string.IsNullOrEmpty(mysql))
+            {
+                Log.Information("使用Db配置源");
+                return builder.Add(new DbConfigurationSource(mysql));
+            }
 
             if (!string.IsNullOrEmpty(redis))
             {
                 Log.Information("使用Redis配置源");
                 return builder.Add(new RedisConfigurationSource(redis));
             }
-            if (!string.IsNullOrEmpty(mysql))
-            {
-                Log.Information("使用Db配置源");
-                return builder.Add(new DbConfigurationSource(mysql));
-            }
+            
             
 
 

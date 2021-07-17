@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using JacobAssistant.Bots.Exceptions;
-// using log4net;
+using Serilog;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
@@ -18,7 +18,6 @@ namespace JacobAssistant.Bots.TelegramBots
     {
         // private readonly ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
         private readonly IServiceProvider _provider;
-//todo: 用新api替换
         public AssistantBotClient(BotOptions options, IServiceProvider provider)
         {
             _provider = provider;
@@ -30,6 +29,7 @@ namespace JacobAssistant.Bots.TelegramBots
 
         public void Start()
         {
+            Log.Information("Bot重新上线");
             Client = new TelegramBotClient(Options.Token);
             Client.OnMessage += OnMessage;
             Client.StartReceiving();
@@ -67,6 +67,7 @@ namespace JacobAssistant.Bots.TelegramBots
         {
             try
             {
+                Log.Information($"{e.Message}");
                 // not text type
                 if (!e.Message.Type.Equals(MessageType.Text))
                 {
