@@ -56,7 +56,7 @@ namespace JacobAssistant
             services.AddSingleton<IJobFactory, SingletonJobFactory>();
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             services.AddSingleton<EmailJob>();
-            services.AddSingleton(new JobSchedule(typeof(EmailJob), "0 0/5 * * * ? *"));
+            // services.AddSingleton(new JobSchedule(typeof(EmailJob), "0 0/5 * * * ? *"));
             services.AddHostedService<QuartzHostedService>();
         }
 
