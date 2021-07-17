@@ -6,14 +6,14 @@ namespace JacobAssistant.Services
 {
     public class EmailAccountService
     {
-        private AssistantDbContext _context;
+        private ConfigurationDbContext _context;
 
         public EmailAccountService()
         {
-            _context = new AssistantDbContext();
+            // _context = new AssistantDbContext();
         }
 
-        public EmailAccountService(AssistantDbContext context)
+        public EmailAccountService(ConfigurationDbContext context)
         {
             _context = context;
         }

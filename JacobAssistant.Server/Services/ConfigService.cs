@@ -15,10 +15,10 @@ namespace JacobAssistant.Services
         private const string V2SubName = "v2sub";
 
 
-        private readonly AssistantDbContext _dbContext;
+        private readonly ConfigurationDbContext _dbContext;
         private readonly bool _isDev;
 
-        public ConfigService(AssistantDbContext dbContext, bool isDev)
+        public ConfigService(ConfigurationDbContext dbContext, bool isDev)
         {
             _dbContext = dbContext;
             _isDev = isDev;

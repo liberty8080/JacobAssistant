@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
+using Serilog;
 
 namespace JacobAssistant.Services
 {
@@ -19,6 +20,7 @@ namespace JacobAssistant.Services
             catch (SocketException e)
             {
                 /*MessageBox.Show(e.Message);*/
+                Log.Error(e,"发送失败");
             }
 
             return -100;

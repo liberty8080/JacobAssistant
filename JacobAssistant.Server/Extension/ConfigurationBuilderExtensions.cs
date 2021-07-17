@@ -3,6 +3,7 @@ using JacobAssistant.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.VisualBasic;
+using Serilog;
 
 namespace JacobAssistant.Extension
 {
@@ -17,16 +18,18 @@ namespace JacobAssistant.Extension
             var redis = tempConfig["ConfigurationSource:Redis"];
             var mysql = tempConfig["ConfigurationSource:Mysql"];
 
-            Console.WriteLine(redis);
-            Console.WriteLine(mysql);
             if (!string.IsNullOrEmpty(redis))
             {
+                Log.Information("使用Redis配置源");
                 return builder.Add(new RedisConfigurationSource(redis));
             }
-
-            /*
             if (!string.IsNullOrEmpty(mysql))
-                return builder.Add();*/
+            {
+                Log.Information("使用Db配置源");
+                return builder.Add(new DbConfigurationSource(mysql));
+            }
+            
+
 
             return builder;
         }

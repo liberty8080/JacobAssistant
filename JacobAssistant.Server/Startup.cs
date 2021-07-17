@@ -39,10 +39,10 @@ namespace JacobAssistant
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "JacobAssistant.Server", Version = "v1"});
             });
             //todo: make it flexible
-            services.AddDbContext<AssistantDbContext>(options=> options.UseMySql(ServerVersion.Parse("")) );
+            services.AddDbContext<ConfigurationDbContext>(options=> options.UseMySQL(Configuration["ConfigurationSource:Mysql"]) );
             services.AddScoped<ConfigService, ConfigService>(provider =>
                 new ConfigService(
-                    provider.CreateScope().ServiceProvider.GetService<AssistantDbContext>(),
+                    provider.CreateScope().ServiceProvider.GetService<ConfigurationDbContext>(),
                     provider.GetService<IHostEnvironment>().IsDevelopment()));
             services.AddSingleton<SimpleCommands>();
 
@@ -62,7 +62,7 @@ namespace JacobAssistant
 
         //todo: 待完善,serilog集成
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,AssistantBotClient client)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var teleBotToken = Configuration[ConfigMapping.TelegramProdBotToken];
             var channelId = Configuration[ConfigMapping.TelegramLogChannelId];
@@ -84,7 +84,7 @@ namespace JacobAssistant
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             // 启动Bot
-            client.Start();
+            // client.Start();
         }
     }
 }

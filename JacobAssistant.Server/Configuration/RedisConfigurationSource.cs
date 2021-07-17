@@ -51,7 +51,6 @@ namespace JacobAssistant.Configuration
             using var redis = ConnectionMultiplexer.Connect(_connectionStr);
             var conf = redis.GetDatabase(0).HashGetAll(RedisConfigurationDbKey);
             Data = conf.Any() ? conf.ToStringDictionary() : CreateAndSaveDefaultValues(redis.GetDatabase(0));
-            foreach (var keyValuePair in Data) Console.WriteLine(keyValuePair);
         }
 
 
