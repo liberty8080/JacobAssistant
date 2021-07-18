@@ -28,5 +28,10 @@ namespace JacobAssistant.Bots.Commands
                 .FirstOrDefault(item => item.Name.Replace("Command", "").ToUpper().Equals(name.ToUpper()));
             return cmd != null ? (ICommand) Activator.CreateInstance(cmd) : Activator.CreateInstance<HelpCommand>();
         }
+
+        static bool IsCommand(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
