@@ -40,7 +40,6 @@ namespace JacobAssistant
 
             services.AddDbContext<ConfigurationDbContext>(options=> 
                 options.UseMySQL(Configuration["ConfigurationSource:Mysql"]) );
-            services.AddSingleton<SimpleCommands>();
 
             /*
             services.AddTransient<BotOptions, BotOptions>(pro =>

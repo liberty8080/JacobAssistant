@@ -5,7 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
+using JacobAssistant.Bots.Commands;
 using JacobAssistant.Bots.Exceptions;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -18,9 +20,12 @@ namespace JacobAssistant.Bots.TelegramBots
     {
         // private readonly ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
         private readonly IServiceProvider _provider;
-        public AssistantBotClient(BotOptions options, IServiceProvider provider)
+        private readonly IConfiguration _configuration;
+
+        public AssistantBotClient(BotOptions options, IServiceProvider provider,IConfiguration configuration)
         {
             _provider = provider;
+            _configuration = configuration;
             Options = options;
         }
 
@@ -65,7 +70,7 @@ namespace JacobAssistant.Bots.TelegramBots
 
         private void OnMessage(object sender, MessageEventArgs e)
         {
-            try
+            /*try
             {
                 Log.Information($"{e.Message}");
                 // not text type
@@ -105,6 +110,17 @@ namespace JacobAssistant.Bots.TelegramBots
                 var options = new JsonSerializerOptions {WriteIndented = true};
                 SendMessageToChannel(exception.ToString());
                 SendMessageToChannel(JsonSerializer.Serialize(e.Message, options));
+            }*/
+            //todo:permissionHandler
+            IMessageHandler command = new CommandHandler();
+            try
+            {
+                var result = command.Handle(sender,e);
+                ReplyMessage(e,result.Text);
+            }
+            catch (Exception ex)
+            {
+                ReplyMessage(e,ex.Message);
             }
         }
 
