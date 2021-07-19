@@ -40,6 +40,19 @@ namespace JacobAssistant.Configuration
             Data = configs.Any() ? ToDict(configs) : CreateAndSaveDefaultValues(context);
         }
 
+        public override void Set(string key, string value)
+        {
+            using var context = new ConfigurationDbContext(_connStr);
+            var config = context.Configs.FirstOrDefault(c => c.Name == key);
+            if (config == null)
+                config = new Config {Name = key, Value = value};
+            else
+                config.Value = value;
+            context.Configs.Update(config);
+            context.SaveChanges();
+            Load();
+        }
+
         private static Dictionary<string,string> ToDict(DbSet<Config> configs)
         {
             return configs.ToDictionary(e=>e.Name,e=>e.Value);

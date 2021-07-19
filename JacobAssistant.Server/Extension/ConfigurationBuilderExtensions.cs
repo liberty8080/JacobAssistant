@@ -20,7 +20,7 @@ namespace JacobAssistant.Extension
             
             if (!string.IsNullOrEmpty(mysql))
             {
-                Log.Information("使用Db配置源");
+                Log.Information($"使用Db配置源: {mysql}");
                 return builder.Add(new DbConfigurationSource(mysql));
             }
 

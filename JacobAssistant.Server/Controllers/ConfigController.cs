@@ -7,6 +7,7 @@ using JacobAssistant.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace JacobAssistant.Controllers
 {
@@ -14,6 +15,20 @@ namespace JacobAssistant.Controllers
     [ApiController]
     public class ConfigController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        public ConfigController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        [HttpGet]
+        public IDictionary<string,string> GetAll()
+        {
+            return _configuration.AsEnumerable()
+                .ToDictionary(item=>item.Key,item=>item.Value);
+        }
+        
         /*private readonly ConfigService _service;
 
         public ConfigController(ConfigService service)
