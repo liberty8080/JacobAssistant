@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace JacobAssistant.Configuration
 {
-    public class DbConfigurationSource:IConfigurationSource
+    public class DbConfigurationSource : IConfigurationSource
     {
         private readonly string _connStr;
 
@@ -15,7 +15,7 @@ namespace JacobAssistant.Configuration
         {
             _connStr = connStr;
         }
-        
+
         public IConfigurationProvider Build(IConfigurationBuilder builder)
         {
             return new DbConfigurationProvider(_connStr);
@@ -53,23 +53,21 @@ namespace JacobAssistant.Configuration
             Load();
         }
 
-        private static Dictionary<string,string> ToDict(DbSet<Config> configs)
+        private static Dictionary<string, string> ToDict(DbSet<Config> configs)
         {
-            return configs.ToDictionary(e=>e.Name,e=>e.Value);
+            return configs.ToDictionary(e => e.Name, e => e.Value);
         }
 
         private static Dictionary<string, string> CreateAndSaveDefaultValues(ConfigurationDbContext dbContext)
         {
-
-
             var keys = ConfigMapping.AllConfigKeys();
             foreach (var key in keys)
             {
                 dbContext.Add(new Config {Name = key, Value = ""});
             }
-            dbContext.SaveChanges();
-            return keys.ToDictionary(item => item, item=>"");
 
-        } 
+            dbContext.SaveChanges();
+            return keys.ToDictionary(item => item, item => "");
+        }
     }
 }

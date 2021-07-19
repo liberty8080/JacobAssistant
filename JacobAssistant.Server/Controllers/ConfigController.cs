@@ -23,12 +23,12 @@ namespace JacobAssistant.Controllers
         }
 
         [HttpGet]
-        public IDictionary<string,string> GetAll()
+        public IDictionary<string, string> GetAll()
         {
             return _configuration.AsEnumerable()
-                .ToDictionary(item=>item.Key,item=>item.Value);
+                .ToDictionary(item => item.Key, item => item.Value);
         }
-        
+
         /*private readonly ConfigService _service;
 
         public ConfigController(ConfigService service)

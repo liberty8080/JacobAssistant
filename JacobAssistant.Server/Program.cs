@@ -24,7 +24,7 @@ namespace JacobAssistant
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Error)
-                .MinimumLevel.Override("Quartz",LogEventLevel.Warning)
+                .MinimumLevel.Override("Quartz", LogEventLevel.Warning)
                 .Enrich.FromLogContext()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();

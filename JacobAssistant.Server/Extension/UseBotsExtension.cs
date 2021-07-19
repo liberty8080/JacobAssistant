@@ -5,7 +5,7 @@ namespace JacobAssistant.Extension
 {
     public static class UseBotsExtension
     {
-        public static IApplicationBuilder UseBots(this IApplicationBuilder builder,AssistantBotClient client)
+        public static IApplicationBuilder UseBots(this IApplicationBuilder builder, AssistantBotClient client)
         {
             client.Start();
             return builder;

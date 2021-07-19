@@ -3,11 +3,10 @@ using Telegram.Bot.Args;
 
 namespace JacobAssistant.Bots.TelegramBots
 {
-    public abstract class BaseMessageHandler:IMessageHandler
+    public abstract class BaseMessageHandler : IMessageHandler
     {
-
         protected IMessageHandler Next;
-        
+
         public void SetNext(IMessageHandler handler)
         {
             Next = handler;

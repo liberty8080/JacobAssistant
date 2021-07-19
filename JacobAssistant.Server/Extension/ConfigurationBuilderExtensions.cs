@@ -15,9 +15,9 @@ namespace JacobAssistant.Extension
         public static IConfigurationBuilder AddMyConfiguration(this IConfigurationBuilder builder)
         {
             var tempConfig = builder.Build();
-            var redis = tempConfig["ConfigurationSource:Redis"];
-            var mysql = tempConfig["ConfigurationSource:Mysql"];
-            
+
+            var redis = tempConfig.GetConnectionString("Redis");
+            var mysql = tempConfig.GetConnectionString("Mysql");
             if (!string.IsNullOrEmpty(mysql))
             {
                 Log.Information($"使用Db配置源: {mysql}");
@@ -26,11 +26,9 @@ namespace JacobAssistant.Extension
 
             if (!string.IsNullOrEmpty(redis))
             {
-                Log.Information("使用Redis配置源");
+                Log.Information($"使用Redis配置源: {redis}");
                 return builder.Add(new RedisConfigurationSource(redis));
             }
-            
-            
 
 
             return builder;

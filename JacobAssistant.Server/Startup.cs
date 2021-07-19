@@ -22,8 +22,11 @@ namespace JacobAssistant
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
+            _env = env;
             Configuration = configuration;
         }
 
@@ -38,22 +41,18 @@ namespace JacobAssistant
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "JacobAssistant.Server", Version = "v1"});
             });
 
-            services.AddDbContext<ConfigurationDbContext>(options=> 
-                options.UseMySQL(Configuration["ConfigurationSource:Mysql"]) );
+            services.AddDbContext<ConfigurationDbContext>(options =>
+                options.UseMySQL(Configuration.GetConnectionString("Mysql")));
 
-            /*
-            services.AddTransient<BotOptions, BotOptions>(pro =>
-                pro.CreateScope().ServiceProvider.GetService<ConfigService>()?.BotOptions());*/
-            /*services.AddSingleton<AssistantBotClient>(new BotOptions(Configuration[ConfigMapping.TelegramDevBotToken],
-                    Configuration[ConfigMapping.TelegramAdminId],
-                    Configuration[ConfigMapping.TelegramAnnounceChannelId]),
-                Configuration);*/
-            services.AddSingleton<BotOptions>(provider => new BotOptions(Configuration[ConfigMapping.TelegramDevBotToken],
-                    long.Parse(Configuration[ConfigMapping.TelegramAdminId]),
+            services.AddSingleton(_ => new BotOptions(
+                _env.IsProduction()
+                    ? Configuration[ConfigMapping.TelegramProdBotToken]
+                    : Configuration[ConfigMapping.TelegramDevBotToken],
+                long.Parse(Configuration[ConfigMapping.TelegramAdminId]),
                 long.Parse(Configuration[ConfigMapping.TelegramAnnounceChannelId])));
-            services.AddSingleton<AssistantBotClient,AssistantBotClient>();
-            
-            
+            // services.AddSingleton<AssistantBotClient,AssistantBotClient>();
+
+
             services.AddScoped<EmailAccountService>();
             services.AddSingleton(provider => new EmailHandler(provider.GetService<AssistantBotClient>()
                 , provider.CreateScope().ServiceProvider.GetService<EmailAccountService>()));
@@ -65,7 +64,7 @@ namespace JacobAssistant
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,AssistantBotClient client)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AssistantBotClient client)
         {
             if (env.IsDevelopment())
             {
@@ -82,8 +81,7 @@ namespace JacobAssistant
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             // 启动Bot
-            client.Start();
-            // app.UseBots();
+            // client.Start();
         }
     }
 }

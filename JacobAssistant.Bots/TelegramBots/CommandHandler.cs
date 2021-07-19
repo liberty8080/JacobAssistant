@@ -11,10 +11,9 @@ namespace JacobAssistant.Bots.TelegramBots
 {
     public class CommandHandler : BaseMessageHandler
     {
- 
         public override IResult Handle(MessageEventArgs e)
         {
-            throw new  NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override IResult Handle(object sender, MessageEventArgs e)
@@ -27,7 +26,8 @@ namespace JacobAssistant.Bots.TelegramBots
                 return null;
             }
 
-            Log.Information($"Received Command: \"{msg}\" from user: {e.Message?.Chat?.Username}({e.Message?.Chat?.Id})");
+            Log.Information(
+                $"Received Command: \"{msg}\" from user: {e.Message?.Chat?.Username}({e.Message?.Chat?.Id})");
             var cmdStr = msg.Substring(1);
             Log.Debug($"CmdStr: {cmdStr}");
             var command = ICommand.GetCommand(cmdStr);

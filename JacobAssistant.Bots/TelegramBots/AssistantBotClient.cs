@@ -22,7 +22,7 @@ namespace JacobAssistant.Bots.TelegramBots
         private readonly IServiceProvider _provider;
         private readonly IConfiguration _configuration;
 
-        public AssistantBotClient(BotOptions options, IServiceProvider provider,IConfiguration configuration)
+        public AssistantBotClient(BotOptions options, IServiceProvider provider, IConfiguration configuration)
         {
             _provider = provider;
             _configuration = configuration;
@@ -115,12 +115,12 @@ namespace JacobAssistant.Bots.TelegramBots
             IMessageHandler command = new CommandHandler();
             try
             {
-                var result = command.Handle(sender,e);
-                ReplyMessage(e,result.Text);
+                var result = command.Handle(sender, e);
+                ReplyMessage(e, result.Text);
             }
             catch (Exception ex)
             {
-                ReplyMessage(e,ex.Message);
+                ReplyMessage(e, ex.Message);
             }
         }
 

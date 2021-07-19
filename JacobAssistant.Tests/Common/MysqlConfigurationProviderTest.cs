@@ -6,7 +6,7 @@ using Serilog;
 namespace JacobAssistant.Tests.Common
 {
     [TestFixture]
-    public class MysqlConfigurationProviderTest:BaseTest
+    public class MysqlConfigurationProviderTest : BaseTest
     {
         private DbConfigurationProvider _provider;
 
@@ -26,13 +26,20 @@ namespace JacobAssistant.Tests.Common
         [Test]
         public void UpdateConfigTest()
         {
-            _provider.Set("Test","");
+            _provider.Set("Test", "");
             _provider.TryGet("Test", out var before);
             Log.Debug($"before: {before}");
-            _provider.Set("Test","Test");
+            _provider.Set("Test", "Test");
             _provider.TryGet("Test", out var after);
             Log.Debug($"after: {after}");
-            Assert.AreEqual("Test",after);
+            Assert.AreEqual("Test", after);
         }
-}
+
+        [Test]
+        public void OptionTest()
+        {
+            _provider.TryGet("Telegram:DevBotToken", out var result);
+            Log.Debug($"Result:{result}");
+        }
+    }
 }

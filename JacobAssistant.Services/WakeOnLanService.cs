@@ -20,7 +20,7 @@ namespace JacobAssistant.Services
             catch (SocketException e)
             {
                 /*MessageBox.Show(e.Message);*/
-                Log.Error(e,"发送失败");
+                Log.Error(e, "发送失败");
             }
 
             return -100;

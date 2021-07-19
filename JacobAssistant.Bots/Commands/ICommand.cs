@@ -18,7 +18,7 @@ namespace JacobAssistant.Bots.Commands
         static IEnumerable<Type> GetCommands()
         {
             var x = Assembly.GetAssembly(typeof(ICommand))?.GetTypes()
-                .Where(item => typeof(ICommand).IsAssignableFrom(item)).Where(item=> item.IsClass);
+                .Where(item => typeof(ICommand).IsAssignableFrom(item)).Where(item => item.IsClass);
             return x;
         }
 

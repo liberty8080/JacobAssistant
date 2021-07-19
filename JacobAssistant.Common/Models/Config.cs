@@ -16,6 +16,7 @@ namespace JacobAssistant.Common.Models
         [Column(TypeName = "varchar(200)")]
 
         public string Name { get; set; }
+
         public string Value { get; set; }
     }
 }

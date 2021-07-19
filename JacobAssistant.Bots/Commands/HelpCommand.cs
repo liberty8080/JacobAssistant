@@ -4,7 +4,7 @@ using Telegram.Bot.Args;
 
 namespace JacobAssistant.Bots.Commands
 {
-    public class HelpCommand:ICommand
+    public class HelpCommand : ICommand
     {
         public HelpCommand()
         {
@@ -16,6 +16,7 @@ namespace JacobAssistant.Bots.Commands
         public string Name { get; set; }
         public string Desc { get; set; }
         public int Order { get; set; }
+
         public IResult Execute(object sender, MessageEventArgs e)
         {
             string result = null;
@@ -23,14 +24,16 @@ namespace JacobAssistant.Bots.Commands
             var commands = ICommand.GetCommands();
             foreach (var command in commands)
             {
-                var cmd = (ICommand)Activator.CreateInstance(command);
+                var cmd = (ICommand) Activator.CreateInstance(command);
                 if (cmd == null)
                 {
                     throw new ApplicationException("Help命令执行失败");
                 }
+
                 result += $"/{cmd.Name} {cmd.Desc}\n";
             }
-            return new Result{Text = result};
+
+            return new Result {Text = result};
         }
     }
 }

@@ -8,7 +8,6 @@ namespace JacobAssistant.Common.Models
     {
         private readonly string _connStr;
 
-  
 
         public ConfigurationDbContext(string connStr)
         {
@@ -25,10 +24,7 @@ namespace JacobAssistant.Common.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-                optionsBuilder.UseMySQL(_connStr);
+            optionsBuilder.UseMySQL(_connStr);
         }
-
- 
-
     }
 }
