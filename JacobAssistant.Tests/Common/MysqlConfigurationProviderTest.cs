@@ -11,7 +11,7 @@ namespace JacobAssistant.Tests.Common
         [SetUp]
         public void Setup()
         {
-            _provider = new DbConfigurationProvider("server=192.168.1.12;userid=aide;pwd=jacob_aide;port=3306;database=jacob_aide;sslmode=none");
+            _provider = new DbConfigurationProvider("server=127.0.0.1;userid=aide;pwd=jacob_aide;port=3306;database=jacob_aide;sslmode=none");
         }
 
         [Test]

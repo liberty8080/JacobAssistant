@@ -22,10 +22,6 @@
       <ProjectReference Include="..\JacobAssistant.Common\JacobAssistant.Common.csproj" />
       <ProjectReference Include="..\JacobAssistant.Services\JacobAssistant.Services.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Services" />
-    </ItemGroup>
     
 
 </Project>
