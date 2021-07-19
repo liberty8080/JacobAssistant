@@ -12,6 +12,8 @@
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateConfigTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.OptionTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigurationTest.ConfTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigurationTest.OptionsTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=384616a7_002D8bda_002D407b_002Dac3c_002D1bfc0c2d9d2f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConfigServiceTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
@@ -24,6 +26,7 @@
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.OptionTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=appsettings/@EntryIndexedValue">True</s:Boolean>
 	
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=DDNS/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=fastlink/@EntryIndexedValue">True</s:Boolean>

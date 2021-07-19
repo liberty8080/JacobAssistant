@@ -17,6 +17,7 @@ using Org.BouncyCastle.Utilities;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
+using Serilog;
 
 namespace JacobAssistant
 {
@@ -43,16 +44,21 @@ namespace JacobAssistant
 
             services.AddDbContext<ConfigurationDbContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("Mysql")));
-
-            services.AddSingleton(_ => new BotOptions(
+            
+            services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
+            
+            /*services.AddSingleton(_ => new BotOptions(
                 _env.IsProduction()
                     ? Configuration[ConfigMapping.TelegramProdBotToken]
                     : Configuration[ConfigMapping.TelegramDevBotToken],
                 long.Parse(Configuration[ConfigMapping.TelegramAdminId]),
-                long.Parse(Configuration[ConfigMapping.TelegramAnnounceChannelId])));
+                long.Parse(Configuration[ConfigMapping.TelegramAnnounceChannelId])));*/
             // services.AddSingleton<AssistantBotClient,AssistantBotClient>();
-
-
+            if (!_env.IsEnvironment("Development2"))
+            {
+                Log.Debug("trusted env , start AddBot");
+                services.AddBots(Configuration,_env);
+            }
             services.AddScoped<EmailAccountService>();
             services.AddSingleton(provider => new EmailHandler(provider.GetService<AssistantBotClient>()
                 , provider.CreateScope().ServiceProvider.GetService<EmailAccountService>()));
@@ -64,7 +70,7 @@ namespace JacobAssistant
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AssistantBotClient client)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
