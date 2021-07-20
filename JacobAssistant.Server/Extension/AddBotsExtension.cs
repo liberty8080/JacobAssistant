@@ -1,4 +1,5 @@
-﻿using JacobAssistant.Bots.TelegramBots;
+﻿using System;
+using JacobAssistant.Bots.TelegramBots;
 using JacobAssistant.Common.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,11 @@ namespace JacobAssistant.Extension
             service.AddTransient(_ => new BotOptions(env.IsProduction()?options.TelegramProdBotToken:options.TelegramDevBotToken,
                 options.TelegramAdminId,options.TelegramAnnounceChannelId));
             service.AddSingleton<AssistantBotClient,AssistantBotClient>();
+            // start the bot
+            var provider = service.BuildServiceProvider();
+            var botClient = provider.GetService<AssistantBotClient>();
+            if (botClient == null) throw new ApplicationException("没有获取到Bot实例");
+            botClient.Start();
             return service;
         }
     }

@@ -47,18 +47,12 @@ namespace JacobAssistant
             
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
             
-            /*services.AddSingleton(_ => new BotOptions(
-                _env.IsProduction()
-                    ? Configuration[ConfigMapping.TelegramProdBotToken]
-                    : Configuration[ConfigMapping.TelegramDevBotToken],
-                long.Parse(Configuration[ConfigMapping.TelegramAdminId]),
-                long.Parse(Configuration[ConfigMapping.TelegramAnnounceChannelId])));*/
-            // services.AddSingleton<AssistantBotClient,AssistantBotClient>();
             if (!_env.IsEnvironment("Development2"))
             {
                 Log.Debug("trusted env , start AddBot");
                 services.AddBots(Configuration,_env);
             }
+            
             services.AddScoped<EmailAccountService>();
             services.AddSingleton(provider => new EmailHandler(provider.GetService<AssistantBotClient>()
                 , provider.CreateScope().ServiceProvider.GetService<EmailAccountService>()));
