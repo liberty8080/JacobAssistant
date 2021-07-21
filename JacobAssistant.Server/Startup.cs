@@ -57,7 +57,6 @@ namespace JacobAssistant
 
             services.AddSingleton<IAnnounceService,ConsoleAnnounceService>();
             //定时任务
-            services.AddTestJob();
             services.AddEmailRemindJob();
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
         }
