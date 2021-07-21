@@ -12,21 +12,21 @@ namespace JacobAssistant.Schedule.Jobs
     public class EmailJob : IJob
     {
         private readonly IEnumerable<IAnnounceService> _announceServices;
-        private readonly EmailHandler _handler;
+        private readonly EmailService _service;
 
-        public EmailJob(IEnumerable<IAnnounceService> announceServices, EmailHandler handler)
+        public EmailJob(IEnumerable<IAnnounceService> announceServices, EmailService service)
         {
             _announceServices = announceServices;
-            _handler = handler;
+            _service = service;
         }
 
         public Task Execute(IJobExecutionContext context)
         {
-            var unreadMails = _handler.GetUnreadMails();
-            Log.Debug($"Received {unreadMails.Count()}Mails");
+            var unreadMails = _service.GetUnreadMails();
+            // Log.Debug($"Received {unreadMails.Count()}Mails");
             foreach (var mail in unreadMails)
             {
-                var text = mail.GetTextBody(TextFormat.Text);
+                var text = mail.Content;
                 foreach (var announceService in _announceServices)
                 {
                     announceService.Announce(text);

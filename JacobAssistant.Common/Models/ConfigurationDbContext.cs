@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-#nullable disable
-
 namespace JacobAssistant.Common.Models
 {
     public partial class ConfigurationDbContext : DbContext
@@ -13,6 +11,7 @@ namespace JacobAssistant.Common.Models
 
         public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<EmailAccount> EmailAccounts { get; set; }
-        
+
+        public virtual DbSet<EmailMessage> EmailMessages { get; set; }
     }
 }

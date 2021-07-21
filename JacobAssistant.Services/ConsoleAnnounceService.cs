@@ -7,7 +7,7 @@ namespace JacobAssistant.Services
     {
         public void Announce(string message)
         {
-            Log.Information($"Announced Message");
+            Log.Information(message);
         }
     }
 }

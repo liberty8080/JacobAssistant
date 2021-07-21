@@ -44,9 +44,7 @@ namespace JacobAssistant
 
             services.AddDbContext<ConfigurationDbContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("Mysql")));
-           
-            /*services.AddDbContextFactory<ConfigurationDbContext>(options=>
-                options.UseMySQL(Configuration.GetConnectionString("Mysql")));*/
+
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
             // 环境区分
             if (!_env.IsEnvironment("Development2"))

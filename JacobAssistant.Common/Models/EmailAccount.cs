@@ -8,4 +8,14 @@
         public int? State { get; set; }
         public int? Type { get; set; }
     }
+
+    public enum EmailAccountState
+    {
+        InActive=0,Active=1
+    }
+
+    public enum EmailAccountType
+    {
+        Custom=0,Outlook=1,Gmail=2
+    }
 }
