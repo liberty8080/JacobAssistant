@@ -987,5 +987,90 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="283" parent="1" name="root"/>
+    <table id="284" parent="3" name="Configs"/>
+    <table id="285" parent="3" name="EmailAccounts"/>
+    <table id="286" parent="3" name="Logs"/>
+    <column id="287" parent="284" name="Id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="288" parent="284" name="Name">
+      <Position>2</Position>
+      <DataType>longtext|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="289" parent="284" name="Value">
+      <Position>3</Position>
+      <DataType>longtext|0s</DataType>
+    </column>
+    <key id="290" parent="284" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="291" parent="285" name="Id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="292" parent="285" name="Email">
+      <Position>2</Position>
+      <DataType>longtext|0s</DataType>
+    </column>
+    <column id="293" parent="285" name="Password">
+      <Position>3</Position>
+      <DataType>longtext|0s</DataType>
+    </column>
+    <column id="294" parent="285" name="State">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="295" parent="285" name="Type">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <key id="296" parent="285" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="297" parent="286" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="298" parent="286" name="Timestamp">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="299" parent="286" name="Level">
+      <Position>3</Position>
+      <DataType>varchar(15)|0s</DataType>
+    </column>
+    <column id="300" parent="286" name="Message">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="301" parent="286" name="Exception">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="302" parent="286" name="Properties">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="303" parent="286" name="_ts">
+      <Position>7</Position>
+      <DataType>timestamp|0s</DataType>
+    </column>
+    <key id="304" parent="286" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

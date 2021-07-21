@@ -2,6 +2,7 @@
 using System.Linq;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Common.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 
@@ -33,7 +34,8 @@ namespace JacobAssistant.Configuration
 
         public override void Load()
         {
-            using var context = new ConfigurationDbContext(_connStr);
+            using var context = new ConfigurationDbContext(
+                new DbContextOptionsBuilder<ConfigurationDbContext>().UseMySQL(_connStr).Options);
             // Create the database if it doesn't exist
             context.Database.EnsureCreated();
             var configs = context.Configs;
