@@ -8,4 +8,8 @@
       <ProjectReference Include="..\JacobAssistant.Common\JacobAssistant.Common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MailKit" Version="2.13.0" />
+    </ItemGroup>
+
 </Project>

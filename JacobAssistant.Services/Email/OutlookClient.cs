@@ -1,6 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-namespace JacobAssistant.Email
+﻿namespace JacobAssistant.Services.Email
 {
     public class OutlookClient : CustomEmailImapClient
     {

@@ -1,40 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JacobAssistant.Bots.TelegramBots;
 using JacobAssistant.Common.Models;
-using JacobAssistant.Services;
+using JacobAssistant.Services.Interfaces;
 using MimeKit;
 
-namespace JacobAssistant.Email
+namespace JacobAssistant.Services.Email
 {
     public class EmailHandler
     {
-        private readonly AssistantBotClient _bot;
+        // private readonly IAnnounceService _bot;
+        private readonly IAnnounceService _announceService;
         private readonly EmailAccountService _service;
-        private List<string> _messages = new();
+        // private List<string> _messages = new();
 
-        public EmailHandler(AssistantBotClient bot, EmailAccountService service)
+        public EmailHandler(IAnnounceService announceService, EmailAccountService service)
         {
-            _bot = bot;
+            // _bot = bot;
+            _announceService = announceService;
             _service = service;
         }
 
-        public void GetUnreadMails()
+        public IEnumerable<MimeMessage> GetUnreadMails()
         {
             var accounts = _service.EmailAccounts();
             Console.WriteLine(accounts.Count);
+            var totalUnread = new List<MimeMessage>();
             foreach (var emailAccount in accounts)
             {
                 using var client = EmailClient(emailAccount);
                 var unread = client.UnreadMails();
-                foreach (var u in unread.Where(u => !_messages.Contains(u.MessageId)))
-                {
-                    var announce = $"标题:{u.Subject}\n发件人:{u.From}\n";
-                    _bot.SendMessageToChannel(announce);
-                    _messages.Add(u.MessageId);
-                }
+                totalUnread.AddRange(unread);
             }
+
+            return totalUnread;
         }
 
         private static CustomEmailImapClient EmailClient(EmailAccount account)

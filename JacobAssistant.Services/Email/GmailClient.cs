@@ -1,7 +1,6 @@
-﻿using MailKit.Net.Proxy;
-using MailKit.Security;
+﻿using MailKit.Security;
 
-namespace JacobAssistant.Email
+namespace JacobAssistant.Services.Email
 {
     public class GmailClient : CustomEmailImapClient
     {

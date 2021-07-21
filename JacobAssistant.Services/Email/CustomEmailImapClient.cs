@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
-using MailKit.Security;
 using MimeKit;
 
-namespace JacobAssistant.Email
+namespace JacobAssistant.Services.Email
 {
     public class CustomEmailImapClient : ImapClient
     {

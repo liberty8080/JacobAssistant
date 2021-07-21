@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using JacobAssistant.Bots.Commands;
 using JacobAssistant.Bots.Exceptions;
+using JacobAssistant.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Telegram.Bot;
@@ -16,7 +17,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace JacobAssistant.Bots.TelegramBots
 {
-    public class AssistantBotClient
+    public class AssistantBotClient:IAnnounceService
     {
         // private readonly ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
         private readonly IServiceProvider _provider;
@@ -156,6 +157,11 @@ namespace JacobAssistant.Bots.TelegramBots
                 where m.GetCustomAttribute<Cmd>() != null
                 select m;
             return methods;
+        }
+
+        public void Announce(string message)
+        {
+            SendMessageToChannel(message);
         }
     }
 }

@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant.Common", "Ja
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant.Services", "JacobAssistant.Services\JacobAssistant.Services.csproj", "{06480A91-A670-442F-AA3B-84243F75EFEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JacobAssistant.Schedule", "JacobAssistant.Schedule\JacobAssistant.Schedule.csproj", "{4C6DB786-2071-4863-8F56-F0989FEAC89B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{06480A91-A670-442F-AA3B-84243F75EFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06480A91-A670-442F-AA3B-84243F75EFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06480A91-A670-442F-AA3B-84243F75EFEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C6DB786-2071-4863-8F56-F0989FEAC89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C6DB786-2071-4863-8F56-F0989FEAC89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C6DB786-2071-4863-8F56-F0989FEAC89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C6DB786-2071-4863-8F56-F0989FEAC89B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

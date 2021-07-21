@@ -1,11 +1,12 @@
-using JacobAssistant.Bots.Commands;
+using System;
 using JacobAssistant.Bots.TelegramBots;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Common.Models;
-using JacobAssistant.Email;
 using JacobAssistant.Extension;
-using JacobAssistant.ScheduleTask;
+using JacobAssistant.Schedule.Extensions;
+using JacobAssistant.Schedule.Jobs;
 using JacobAssistant.Services;
+using JacobAssistant.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Org.BouncyCastle.Utilities;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
@@ -33,7 +33,6 @@ namespace JacobAssistant
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -44,23 +43,21 @@ namespace JacobAssistant
 
             services.AddDbContext<ConfigurationDbContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("Mysql")));
-            
+
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
-            
+            // 环境区分
             if (!_env.IsEnvironment("Development2"))
             {
-                Log.Debug("trusted env , start AddBot");
-                services.AddBots(Configuration,_env);
+                Log.Information("trusted env , start AddBot");
+                services.AddBots(Configuration, _env);
+                //todo:待测试
+                services.AddSingleton<IAnnounceService, AssistantBotClient>();
             }
-            
-            services.AddScoped<EmailAccountService>();
-            services.AddSingleton(provider => new EmailHandler(provider.GetService<AssistantBotClient>()
-                , provider.CreateScope().ServiceProvider.GetService<EmailAccountService>()));
-            services.AddSingleton<IJobFactory, SingletonJobFactory>();
-            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
-            services.AddTransient<EmailJob>();
-            // services.AddSingleton(new JobSchedule(typeof(EmailJob), "0 0/5 * * * ? *"));
-            services.AddHostedService<QuartzHostedService>();
+
+            services.AddSingleton<IAnnounceService,ConsoleAnnounceService>();
+            //定时任务
+            services.AddTestJob();
+            services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,16 +69,10 @@ namespace JacobAssistant
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JacobAssistant.Server v1"));
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            // 启动Bot
-            // client.Start();
         }
     }
 }
