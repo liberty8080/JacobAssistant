@@ -1,14 +1,12 @@
 ﻿using System;
 using JacobAssistant.Bots.TelegramBots;
 using JacobAssistant.Common.Configuration;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Serilog;
 
-namespace JacobAssistant.Extension
+namespace JacobAssistant.Bots.Extensions
 {
     public static class AddBotsExtension
     {

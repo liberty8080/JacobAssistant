@@ -1,4 +1,5 @@
 using System;
+using JacobAssistant.Bots.Extensions;
 using JacobAssistant.Bots.TelegramBots;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Common.Models;
@@ -57,6 +58,7 @@ namespace JacobAssistant
             services.AddSingleton<IAnnounceService,ConsoleAnnounceService>();
             //定时任务
             services.AddTestJob();
+            services.AddEmailRemindJob();
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
         }
 
