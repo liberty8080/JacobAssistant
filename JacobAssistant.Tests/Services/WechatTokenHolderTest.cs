@@ -14,7 +14,7 @@ namespace JacobAssistant.Tests.Services
         public void TokenTest()
         {
             AppOptions appOptions = new() {WechatCorpId = Configuration["App:WechatCorpId"]
-                ,WechatCorpSecret = Configuration["App:WechatCorpSecret"]};
+                ,WechatAppSecret = Configuration["App:WechatCorpSecret"]};
             var holder = new WechatTokenHolder(Options.Create(appOptions));
             Log.Debug("test");
             Log.Debug(holder.Token);

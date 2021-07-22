@@ -31,22 +31,20 @@ namespace JacobAssistant.Services.Email
                 foreach (var mail in unread)
                 {
                     var query = _context.EmailMessages.Any(message => message.Id == mail.MessageId);
-                    if (!query)
+                    if (query) continue;
+                    var emailMessage = new EmailMessage()
                     {
-                        var emailMessage = new EmailMessage()
-                        {
-                            Id = mail.MessageId,
-                            Subject = mail.Subject,
-                            Date = mail.Date,
-                            Content = mail.GetTextBody(TextFormat.Plain),
-                            Sender = mail.Sender==null?mail.From.ToString():mail.Sender.ToString(),
-                            Priority = mail.Priority.ToString(),
-                            To = mail.To.ToString()
-                        };
-                        totalUnread.Add(emailMessage);
-                        _context.EmailMessages.Add(emailMessage);
-                        _context.SaveChanges();
-                    }
+                        Id = mail.MessageId,
+                        Subject = mail.Subject,
+                        Date = mail.Date,
+                        Content = mail.GetTextBody(TextFormat.Plain),
+                        Sender = mail.Sender==null?mail.From.ToString():mail.Sender.ToString(),
+                        Priority = mail.Priority.ToString(),
+                        To = mail.To.ToString()
+                    };
+                    totalUnread.Add(emailMessage);
+                    _context.EmailMessages.Add(emailMessage);
+                    _context.SaveChanges();
                 }
                 // totalUnread.AddRange(unread);
             }

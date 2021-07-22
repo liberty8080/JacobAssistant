@@ -15,7 +15,8 @@ namespace JacobAssistant.Common.Configuration
 
         public string WechatAnnounceChannelId { get; set; }
         public string WechatCorpId { get; set; }
-        public string WechatCorpSecret { get; set; }
+        public string WechatAppSecret { get; set; }
+        public string WechatAppId { get; set; }
         
     }
 }

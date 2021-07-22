@@ -17,7 +17,7 @@ namespace JacobAssistant.Services.Wechat
 
         private DateTime _lastFetchTime;
         private WechatTokenResp _token;
-        
+
         public string Token
         {
             get
@@ -32,6 +32,7 @@ namespace JacobAssistant.Services.Wechat
         public WechatTokenHolder(IOptions<AppOptions> options)
         {
             _options = options.Value;
+            Fetch();
         }
 
         private bool IsExpired(int expireIn)
@@ -48,7 +49,7 @@ namespace JacobAssistant.Services.Wechat
             using var client = new HttpClient();
             var url = TokenRequestUrl
                 .Replace("ID", _options.WechatCorpId)
-                .Replace("SECRET", _options.WechatCorpSecret);
+                .Replace("SECRET", _options.WechatAppSecret);
             var tempRes = client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
             /*var options = new JsonSerializerOptions
             {

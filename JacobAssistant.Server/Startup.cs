@@ -7,7 +7,9 @@ using JacobAssistant.Extension;
 using JacobAssistant.Schedule.Extensions;
 using JacobAssistant.Schedule.Jobs;
 using JacobAssistant.Services;
+using JacobAssistant.Services.Announce;
 using JacobAssistant.Services.Interfaces;
+using JacobAssistant.Services.Wechat;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +57,8 @@ namespace JacobAssistant
                 services.AddSingleton<IAnnounceService, AssistantBotClient>();
             }
 
+            services.AddSingleton<WechatTokenHolder,WechatTokenHolder>();
+            services.AddSingleton<IAnnounceService, WechatAnnounceService>();
             services.AddSingleton<IAnnounceService,ConsoleAnnounceService>();
             //定时任务
             services.AddEmailRemindJob();

@@ -1,7 +1,7 @@
 using JacobAssistant.Services.Interfaces;
 using Serilog;
 
-namespace JacobAssistant.Services
+namespace JacobAssistant.Services.Announce
 {
     public class ConsoleAnnounceService:IAnnounceService
     {
