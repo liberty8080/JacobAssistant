@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JacobAssistant.Services.Email;
@@ -22,15 +23,21 @@ namespace JacobAssistant.Schedule.Jobs
 
         public Task Execute(IJobExecutionContext context)
         {
-            var unreadMails = _service.GetUnreadMails();
-            // Log.Debug($"Received {unreadMails.Count()}Mails");
-            foreach (var mail in unreadMails)
+            try
             {
-                var text = mail.Content;
-                foreach (var announceService in _announceServices)
+                var unreadMails = _service.GetUnreadMails();
+                foreach (var mail in unreadMails)
                 {
-                    announceService.Announce(text);
+                    var text = mail.Content;
+                    foreach (var announceService in _announceServices)
+                    {
+                        announceService.Announce(text);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Email Job Execute Failed",e);
             }
 
             return Task.CompletedTask;

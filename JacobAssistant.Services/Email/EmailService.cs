@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JacobAssistant.Common.Models;
@@ -27,26 +28,31 @@ namespace JacobAssistant.Services.Email
             foreach (var emailAccount in accounts)
             {
                 using var client = EmailClient(emailAccount);
-                var unread = client.UnreadMails();
-                foreach (var mail in unread)
+                IEnumerable<MimeMessage> unread;
+                try
                 {
-                    var query = _context.EmailMessages.Any(message => message.Id == mail.MessageId);
-                    if (query) continue;
-                    var emailMessage = new EmailMessage()
-                    {
-                        Id = mail.MessageId,
-                        Subject = mail.Subject,
-                        Date = mail.Date,
-                        Content = mail.GetTextBody(TextFormat.Plain),
-                        Sender = mail.Sender==null?mail.From.ToString():mail.Sender.ToString(),
-                        Priority = mail.Priority.ToString(),
-                        To = mail.To.ToString()
-                    };
+                    unread = client.UnreadMails();
+                }
+                catch (Exception e)
+                {
+                    throw new EmailException("Unread Mails Fetch Failed ",e);
+                }
+                
+                foreach (var emailMessage in from mail in unread let query = _context.EmailMessages.Any(message => message.Id == mail.MessageId) where !query select new EmailMessage()
+                {
+                    Id = mail.MessageId,
+                    Subject = mail.Subject,
+                    Date = mail.Date,
+                    Content = mail.GetTextBody(TextFormat.Plain),
+                    Sender = mail.Sender==null?mail.From.ToString():mail.Sender.ToString(),
+                    Priority = mail.Priority.ToString(),
+                    To = mail.To.ToString()
+                })
+                {
                     totalUnread.Add(emailMessage);
                     _context.EmailMessages.Add(emailMessage);
                     _context.SaveChanges();
                 }
-                // totalUnread.AddRange(unread);
             }
 
             return totalUnread;

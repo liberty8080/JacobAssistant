@@ -26,7 +26,7 @@ namespace JacobAssistant.Services.Email
             Authenticate(Username, Passwd);
         }
 
-        public List<MimeMessage> UnreadMails()
+        public IEnumerable<MimeMessage> UnreadMails()
         {
             Connect();
             if (!IsAuthenticated)

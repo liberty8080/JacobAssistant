@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Text.Json;
 using JacobAssistant.Common.Configuration;
@@ -29,12 +30,20 @@ namespace JacobAssistant.Services.Announce
             var send = JsonSerializer.Serialize(msg);
             HttpContent content = new StringContent(send);
             using var client = new HttpClient();
-            var tempRes =client
-                .PostAsync(RequestUrl.Replace("ACCESS_TOKEN",_tokenHolder.Token),content)
-                .Result;
-            Log.Information("微信消息已发送");
-            var result = tempRes.Content.ReadAsStringAsync().Result;
-            Log.Debug(result);
+            try
+            {
+                var tempRes = client
+                    .PostAsync(RequestUrl.Replace("ACCESS_TOKEN", _tokenHolder.Token), content)
+                    .Result;
+                Log.Information("微信消息已发送");
+                var result = tempRes.Content.ReadAsStringAsync().Result;
+                Log.Debug(result);
+            }
+            catch (Exception e)
+            {
+                throw new WechatAnnounceException("Wechat Announce Failed",e);
+            }
+            
         }
     }
 
@@ -46,7 +55,7 @@ namespace JacobAssistant.Services.Announce
         }
         public WechatSendMessage(string msg)
         {
-            text = new WechatMessageText(){content = msg};
+            text = new WechatMessageText{content = msg};
         }
         public string touser { get; set; }
         public string toparty { get; set; }
@@ -63,5 +72,13 @@ namespace JacobAssistant.Services.Announce
     public class WechatMessageText
     {
         public string content { get; set; }
+    }
+
+    public class WechatAnnounceException:Exception
+    {
+        public WechatAnnounceException(string msg,Exception e):base(msg,e)
+        {
+            
+        }
     }
 }

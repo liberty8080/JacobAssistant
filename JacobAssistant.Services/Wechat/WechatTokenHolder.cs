@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using JacobAssistant.Common.Configuration;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Serilog;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace JacobAssistant.Services.Wechat
@@ -46,23 +47,30 @@ namespace JacobAssistant.Services.Wechat
         /// </summary>
         private void Fetch()
         {
-            using var client = new HttpClient();
-            var url = TokenRequestUrl
-                .Replace("ID", _options.WechatCorpId)
-                .Replace("SECRET", _options.WechatAppSecret);
-            var tempRes = client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
-            /*var options = new JsonSerializerOptions
+            try
             {
-                PropertyNameCaseInsensitive = true
-            };*/
-            var res = JsonSerializer.Deserialize<WechatTokenResp>(tempRes);
-            if (res is not {Errcode: 0})
-            {
-                throw new Exception($"wechat token fetch failed! msg: {res?.Errmsg}");
-            }
+                using var client = new HttpClient();
+                var url = TokenRequestUrl
+                    .Replace("ID", _options.WechatCorpId)
+                    .Replace("SECRET", _options.WechatAppSecret);
 
-            _lastFetchTime = DateTime.Now;
-            _token = res;
+                var tempRes = client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
+
+                var res = JsonSerializer.Deserialize<WechatTokenResp>(tempRes);
+                if (res is not {Errcode: 0})
+                {
+                    throw new Exception($"wechat token fetch failed! msg: {res?.Errmsg}");
+                }
+
+                _lastFetchTime = DateTime.Now;
+                _token = res;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Wechat Token Fetch Failed ");
+                throw new ApplicationException("Wechat Token Fetch Failed ",e);
+            }
+            
         }
     }
 
