@@ -15,18 +15,20 @@ namespace JacobAssistant.Bots.Commands
         int Order { get; set; }
         IResult Execute(object sender, MessageEventArgs e);
 
-        static IEnumerable<Type> GetCommands()
+        static IEnumerable<ICommand> GetCommands()
         {
             var x = Assembly.GetAssembly(typeof(ICommand))?.GetTypes()
-                .Where(item => typeof(ICommand).IsAssignableFrom(item)).Where(item => item.IsClass);
+                .Where(item => typeof(ICommand).IsAssignableFrom(item)).Where(item => item.IsClass)
+                .Select(item=>(ICommand)Activator.CreateInstance(item))
+                .OrderBy(c=> c?.Order ?? 10);
             return x;
         }
 
         static ICommand GetCommand(string name)
         {
             var cmd = GetCommands()
-                .FirstOrDefault(item => item.Name.Replace("Command", "").ToUpper().Equals(name.ToUpper()));
-            return cmd != null ? (ICommand) Activator.CreateInstance(cmd) : Activator.CreateInstance<HelpCommand>();
+                .First(item => item.Name.Replace("Command", "").ToUpper().Equals(name.ToUpper()));
+            return cmd;
         }
 
         static bool IsCommand(string name)

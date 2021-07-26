@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Serilog;
 using Telegram.Bot.Args;
 
@@ -24,13 +25,13 @@ namespace JacobAssistant.Bots.Commands
             var commands = ICommand.GetCommands();
             foreach (var command in commands)
             {
-                var cmd = (ICommand) Activator.CreateInstance(command);
-                if (cmd == null)
+                // var cmd = (ICommand) Activator.CreateInstance(command);
+                if (command == null)
                 {
                     throw new ApplicationException("Help命令执行失败");
                 }
 
-                result += $"/{cmd.Name} {cmd.Desc}\n";
+                result += $"/{command.Name} {command.Desc}\n";
             }
 
             return new Result {Text = result};
