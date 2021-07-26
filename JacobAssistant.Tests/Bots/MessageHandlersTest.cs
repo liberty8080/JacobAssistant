@@ -1,7 +1,5 @@
-﻿using System;
-using JacobAssistant.Bots.Commands;
-using JacobAssistant.Bots.TelegramBots;
-using Microsoft.Extensions.Configuration;
+﻿using JacobAssistant.Bots.Commands;
+using JacobAssistant.Bots.Messages;
 using NUnit.Framework;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;

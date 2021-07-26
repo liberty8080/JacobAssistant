@@ -1,32 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text.Json;
 using System.Threading.Tasks;
-using JacobAssistant.Bots.Commands;
-using JacobAssistant.Bots.Exceptions;
+using JacobAssistant.Bots.Messages;
 using JacobAssistant.Services.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
 namespace JacobAssistant.Bots.TelegramBots
 {
     public class AssistantBotClient:IAnnounceService
     {
-        // private readonly ILog _log = LogManager.GetLogger(typeof(AssistantBotClient));
-        private readonly IServiceProvider _provider;
-        private readonly IConfiguration _configuration;
 
-        public AssistantBotClient(BotOptions options, IServiceProvider provider, IConfiguration configuration)
+        public AssistantBotClient(BotOptions options)
         {
-            _provider = provider;
-            _configuration = configuration;
             Options = options;
         }
 
@@ -54,19 +41,14 @@ namespace JacobAssistant.Bots.TelegramBots
             await SendMessage(e.Message.Chat.Id, text);
         }
 
-        public async Task<Message> SendMessageToJacob(string text)
-        {
-            return await SendMessage(Options.AdminId, text);
-        }
-
         public async void SendMessageToChannel(string text)
         {
             await SendMessage(Options.AnnounceChannel, text);
         }
 
-        public async Task<Message> SendMessage(ChatId chatId, string text)
+        public async Task SendMessage(ChatId chatId, string text)
         {
-            return await Client.SendTextMessageAsync(chatId, text);
+            await Client.SendTextMessageAsync(chatId, text);
         }
 
         private void OnMessage(object sender, MessageEventArgs e)
@@ -125,39 +107,6 @@ namespace JacobAssistant.Bots.TelegramBots
             }
         }
 
-
-        private static BotPermission CommandPermission(MethodInfo method)
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            return method.GetCustomAttribute<Cmd>().Permission;
-        }
-
-        private bool IsAdmin(MessageEventArgs e)
-        {
-            return e.Message.From.Id == Options.AdminId.Identifier;
-        }
-
-        public static MethodInfo MatchCommand(string message)
-        {
-            var method = from m in GetCommands()
-                where m.GetCustomAttribute<Cmd>()?.Name == message
-                select m;
-            var methodInfos = method.ToList();
-            if (methodInfos.Count > 0)
-                return methodInfos.First();
-
-            throw new CommandNotFoundExceptions();
-        }
-
-        public static IEnumerable<MethodInfo> GetCommands()
-        {
-            var methods = from cls in Assembly.GetExecutingAssembly().GetTypes()
-                where cls.IsClass && cls.GetCustomAttribute<TextCommandAttribute>() != null
-                from m in cls.GetMethods()
-                where m.GetCustomAttribute<Cmd>() != null
-                select m;
-            return methods;
-        }
 
         public void Announce(string message)
         {

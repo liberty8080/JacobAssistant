@@ -25,7 +25,6 @@ namespace JacobAssistant.Bots.Commands
             var commands = ICommand.GetCommands();
             foreach (var command in commands)
             {
-                // var cmd = (ICommand) Activator.CreateInstance(command);
                 if (command == null)
                 {
                     throw new ApplicationException("Help命令执行失败");

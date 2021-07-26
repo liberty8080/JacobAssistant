@@ -1,26 +1,23 @@
-﻿using System;
+﻿using System.Linq;
 using JacobAssistant.Bots.Commands;
-using JacobAssistant.Common.Configuration;
-using Microsoft.Extensions.Configuration;
+using JacobAssistant.Bots.TelegramBots;
 using Serilog;
-using Telegram.Bot;
 using Telegram.Bot.Args;
-using Telegram.Bot.Types;
 
-namespace JacobAssistant.Bots.TelegramBots
+namespace JacobAssistant.Bots.Messages
 {
     public class CommandHandler : BaseMessageHandler
     {
         public override IResult Handle(MessageEventArgs e)
         {
-            throw new NotImplementedException();
+            return Handle(this, e);
         }
 
         public override IResult Handle(object sender, MessageEventArgs e)
         {
             var msg = e.Message.Text;
 
-            if (!IsCommand(msg))
+            if (!IsCommand(msg[1..]))
             {
                 Next.Handle(e);
                 return null;
@@ -28,20 +25,17 @@ namespace JacobAssistant.Bots.TelegramBots
 
             Log.Information(
                 $"Received Command: \"{msg}\" from user: {e.Message?.Chat?.Username}({e.Message?.Chat?.Id})");
-            var cmdStr = msg.Substring(1);
+            var cmdStr = msg[1..];
             Log.Debug($"CmdStr: {cmdStr}");
             var command = ICommand.GetCommand(cmdStr);
             Log.Debug($"cmdType: {command}");
-            var result = command.Execute(null, e);
-            /*var client = (TelegramBotClient) sender;
-            client.SendTextMessageAsync(long.Parse(_configuration[ConfigMapping.TelegramAdminId])
-                ,result.Text);*/
+            var result = command.Execute(sender, e);
             return result;
         }
 
         private static bool IsCommand(string msg)
         {
-            return msg.StartsWith("/");
+            return ICommand.GetCommands().ToList().Exists(item=>item.Name==msg);
         }
     }
 }

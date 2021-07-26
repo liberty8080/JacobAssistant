@@ -1,7 +1,7 @@
 ﻿using JacobAssistant.Bots.Commands;
 using Telegram.Bot.Args;
 
-namespace JacobAssistant.Bots.TelegramBots
+namespace JacobAssistant.Bots.Messages
 {
     public abstract class BaseMessageHandler : IMessageHandler
     {
