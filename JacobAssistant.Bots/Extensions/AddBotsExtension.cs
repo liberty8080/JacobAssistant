@@ -1,5 +1,5 @@
 ﻿using System;
-using JacobAssistant.Bots.TelegramBots;
+using JacobAssistant.Bots.TgBots;
 using JacobAssistant.Common.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -7,7 +7,7 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 
-namespace JacobAssistant.Bots.TelegramBots
+namespace JacobAssistant.Bots.TgBots
 {
     public class AssistantBotClient:IAnnounceService
     {

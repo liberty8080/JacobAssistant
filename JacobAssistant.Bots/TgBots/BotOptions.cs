@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types;
 
-namespace JacobAssistant.Bots.TelegramBots
+namespace JacobAssistant.Bots.TgBots
 {
     public class BotOptions
     {

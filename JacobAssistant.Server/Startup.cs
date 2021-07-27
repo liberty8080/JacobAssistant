@@ -1,6 +1,6 @@
 using System;
 using JacobAssistant.Bots.Extensions;
-using JacobAssistant.Bots.TelegramBots;
+using JacobAssistant.Bots.TgBots;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Common.Models;
 using JacobAssistant.Extension;

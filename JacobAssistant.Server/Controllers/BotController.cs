@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JacobAssistant.Bots.TelegramBots;
 using JacobAssistant.Services;
 using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types;

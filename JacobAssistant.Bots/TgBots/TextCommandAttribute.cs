@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JacobAssistant.Bots.Bots
+namespace JacobAssistant.Bots.TgBots
 {
     //Bot权限
     public enum BotPermission
