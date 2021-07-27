@@ -9,9 +9,8 @@ using Telegram.Bot.Types;
 
 namespace JacobAssistant.Bots.TgBots
 {
-    public class AssistantBotClient:IAnnounceService
+    public class AssistantBotClient : IAnnounceService
     {
-
         public AssistantBotClient(BotOptions options)
         {
             Options = options;
@@ -96,13 +95,18 @@ namespace JacobAssistant.Bots.TgBots
             }*/
             //todo:permissionHandler
             IMessageHandler command = new CommandHandler();
+            var eventArgs = new MsgEventArgs
+            {
+                Message = new BotMessage(e.Message)
+            };
             try
             {
-                var result = command.Handle(sender, e);
+                var result = command.Handle(this, eventArgs);
                 ReplyMessage(e, result.Text);
             }
             catch (Exception ex)
             {
+                Log.Error("command execute failed!", ex);
                 ReplyMessage(e, ex.Message);
             }
         }
@@ -111,6 +115,20 @@ namespace JacobAssistant.Bots.TgBots
         public void Announce(string message)
         {
             SendMessageToChannel(message);
+        }
+
+        public async void SendToUser(string message, BotUser user)
+        {
+            try
+            {
+                ChatId chatId = long.Parse(user.UserId);
+                await SendMessage(chatId, message);
+            }
+            catch (Exception e)
+            {
+                Log.Error("user id cast failed！",e);
+                throw;
+            }
         }
     }
 }

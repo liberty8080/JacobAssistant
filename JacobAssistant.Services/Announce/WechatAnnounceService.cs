@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
+using JacobAssistant.Bots.Messages;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Services.Interfaces;
 using JacobAssistant.Services.Wechat;
@@ -23,9 +24,17 @@ namespace JacobAssistant.Services.Announce
 
         public void Announce(string message)
         {
+            
+            
+        }
+
+        public void SendToUser(string message, BotUser user)
+        {
             var msg = new WechatSendMessage(message)
             {
-                touser = _options.WechatAnnounceChannelId, agentid = int.Parse(_options.WechatAppId),msgtype = "text"
+                touser = user?.UserId??_options.WechatAnnounceChannelId, 
+                agentid = int.Parse(_options.WechatAppId),
+                msgtype = "text"
             };
             var send = JsonSerializer.Serialize(msg);
             HttpContent content = new StringContent(send);
@@ -43,7 +52,6 @@ namespace JacobAssistant.Services.Announce
             {
                 throw new WechatAnnounceException("Wechat Announce Failed",e);
             }
-            
         }
     }
 

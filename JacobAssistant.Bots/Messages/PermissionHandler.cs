@@ -1,3 +1,4 @@
+using System;
 using JacobAssistant.Bots.Commands;
 using Telegram.Bot.Args;
 
@@ -5,14 +6,30 @@ namespace JacobAssistant.Bots.Messages
 {
     public class PermissionHandler:BaseMessageHandler
     {
-        public override IResult Handle(MessageEventArgs e)
+
+        public PermissionHandler()
         {
-            throw new System.NotImplementedException();
+            //todo: inject permissionCheck service
+        }
+        public override IResult Handle(MsgEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
-        public override IResult Handle(object sender, MessageEventArgs e)
+        public override IResult Handle<T>(T sender, MsgEventArgs e)
         {
-            throw new System.NotImplementedException();
+            switch (e.Message.MessageSource)
+            {
+                case MessageSource.Telegram:
+                    
+                    break;
+                case MessageSource.Wechat:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return null;
         }
     }
 }

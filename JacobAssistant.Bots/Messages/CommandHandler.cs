@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using JacobAssistant.Bots.Commands;
+using JacobAssistant.Services.Interfaces;
 using Serilog;
 using Telegram.Bot.Args;
 
@@ -7,14 +8,19 @@ namespace JacobAssistant.Bots.Messages
 {
     public class CommandHandler : BaseMessageHandler
     {
-        public override IResult Handle(MessageEventArgs e)
+        private static bool IsCommand(string msg)
         {
-            return Handle(this, e);
+            return ICommand.GetCommands().ToList().Exists(item=>item.Name==msg);
         }
 
-        public override IResult Handle(object sender, MessageEventArgs e)
+        public override IResult Handle(MsgEventArgs e)
         {
-            var msg = e.Message.Text;
+            throw new System.NotImplementedException();
+        }
+
+        public override IResult Handle<T>(T sender, MsgEventArgs e)
+        {
+            var msg = e.Message.Content;
 
             if (!IsCommand(msg[1..]))
             {
@@ -23,18 +29,13 @@ namespace JacobAssistant.Bots.Messages
             }
 
             Log.Information(
-                $"Received Command: \"{msg}\" from user: {e.Message?.Chat?.Username}({e.Message?.Chat?.Id})");
+                $"Received Command: \"{msg}\" from user: {e.Message.From.UserName}({e.Message.From.UserId})");
             var cmdStr = msg[1..];
             Log.Debug($"CmdStr: {cmdStr}");
             var command = ICommand.GetCommand(cmdStr);
             Log.Debug($"cmdType: {command}");
             var result = command.Execute(sender, e);
             return result;
-        }
-
-        private static bool IsCommand(string msg)
-        {
-            return ICommand.GetCommands().ToList().Exists(item=>item.Name==msg);
         }
     }
 }

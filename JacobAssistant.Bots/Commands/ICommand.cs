@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using JacobAssistant.Bots.Messages;
+using JacobAssistant.Services.Interfaces;
 using Serilog;
 using Telegram.Bot.Args;
 using Telegram.Bot.Requests;
@@ -13,7 +15,7 @@ namespace JacobAssistant.Bots.Commands
         string Name { get; set; }
         string Desc { get; set; }
         int Order { get; set; }
-        IResult Execute(object sender, MessageEventArgs e);
+        IResult Execute<T>(T sender, MsgEventArgs e) where T:IAnnounceService;
 
         static IEnumerable<ICommand> GetCommands()
         {

@@ -1,4 +1,5 @@
 ﻿using JacobAssistant.Bots.Commands;
+using JacobAssistant.Services.Interfaces;
 using Telegram.Bot.Args;
 
 namespace JacobAssistant.Bots.Messages
@@ -12,7 +13,7 @@ namespace JacobAssistant.Bots.Messages
             Next = handler;
         }
 
-        public abstract IResult Handle(MessageEventArgs e);
-        public abstract IResult Handle(object sender, MessageEventArgs e);
+        public abstract IResult Handle(MsgEventArgs e);
+        public abstract IResult Handle<T>(T sender, MsgEventArgs e) where T:IAnnounceService;
     }
 }

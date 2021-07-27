@@ -1,4 +1,6 @@
-﻿using JacobAssistant.Services;
+﻿using JacobAssistant.Bots.Messages;
+using JacobAssistant.Services;
+using JacobAssistant.Services.Interfaces;
 using Telegram.Bot.Args;
 
 namespace JacobAssistant.Bots.Commands
@@ -15,7 +17,7 @@ namespace JacobAssistant.Bots.Commands
         public string Desc { get; set; }
         public int Order { get; set; }
 
-        public IResult Execute(object sender, MessageEventArgs e)
+        public IResult Execute<T>(T sender, MsgEventArgs e) where T:IAnnounceService
         {
             return new Result {Text = IpService.GetPublicIp()};
         }
