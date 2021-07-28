@@ -1,5 +1,6 @@
 using System;
 using JacobAssistant.Bots.Extensions;
+using JacobAssistant.Bots.Messages;
 using JacobAssistant.Bots.TgBots;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Common.Models;
@@ -47,6 +48,7 @@ namespace JacobAssistant
             services.AddDbContext<ConfigurationDbContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("Mysql")));
 
+            services.AddSingleton<PermissionHandler,PermissionHandler>();
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
             // 环境区分
             if (!_env.IsEnvironment("Development2"))

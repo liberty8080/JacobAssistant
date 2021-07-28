@@ -1,16 +1,19 @@
 using System;
 using JacobAssistant.Bots.Commands;
+using JacobAssistant.Services;
 using Telegram.Bot.Args;
 
 namespace JacobAssistant.Bots.Messages
 {
-    public class PermissionHandler:BaseMessageHandler
+    public class PermissionHandler : BaseMessageHandler
     {
+        private readonly PermissionService _permissionService;
 
-        public PermissionHandler()
+        public PermissionHandler(PermissionService permissionService)
         {
-            //todo: inject permissionCheck service
+            _permissionService = permissionService;
         }
+
         public override IResult Handle(MsgEventArgs e)
         {
             throw new NotImplementedException();
@@ -18,17 +21,13 @@ namespace JacobAssistant.Bots.Messages
 
         public override IResult Handle<T>(T sender, MsgEventArgs e)
         {
-            switch (e.Message.MessageSource)
+            var cmdName = ICommand.ParseCommandName(e.Message);
+            if (!ICommand.IsCommand(cmdName)) return null;
+            var check = _permissionService.CheckPermission(e.Message.From, cmdName);
+            if (check)
             {
-                case MessageSource.Telegram:
-                    
-                    break;
-                case MessageSource.Wechat:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Next.Handle(e);
             }
-
             return null;
         }
     }

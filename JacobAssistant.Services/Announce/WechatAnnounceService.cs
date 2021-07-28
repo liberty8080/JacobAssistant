@@ -1,8 +1,8 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
-using JacobAssistant.Bots.Messages;
 using JacobAssistant.Common.Configuration;
+using JacobAssistant.Common.Models;
 using JacobAssistant.Services.Interfaces;
 using JacobAssistant.Services.Wechat;
 using Microsoft.Extensions.Options;

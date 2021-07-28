@@ -1,4 +1,5 @@
 using System;
+using JacobAssistant.Common.Models;
 using Telegram.Bot.Types;
 
 namespace JacobAssistant.Bots.Messages
@@ -25,7 +26,8 @@ namespace JacobAssistant.Bots.Messages
             return new()
             {
                 UserId = tgUser.Id.ToString(),
-                UserName = tgUser.FirstName
+                UserName = tgUser.FirstName,
+                Type = UserType.Telegram
             };
         }
     }

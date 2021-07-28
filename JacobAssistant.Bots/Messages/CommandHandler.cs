@@ -22,7 +22,7 @@ namespace JacobAssistant.Bots.Messages
         {
             var msg = e.Message.Content;
 
-            if (!IsCommand(msg[1..]))
+            if (!ICommand.IsCommand(msg[1..]))
             {
                 Next.Handle(e);
                 return null;

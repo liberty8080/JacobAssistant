@@ -29,9 +29,35 @@ namespace JacobAssistant.Bots.Commands
 
         static ICommand GetCommand(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new Exception("Command Name Can't Be Null!");
+            }
             var cmd = GetCommands()
                 .First(item => item.Name.Replace("Command", "").ToUpper().Equals(name.ToUpper()));
             return cmd;
+        }
+
+        /// <summary>
+        /// Check If Command
+        /// </summary>
+        /// <param name="commandName"></param>
+        /// <returns></returns>
+        static bool IsCommand(string commandName)
+        {
+            if (string.IsNullOrEmpty(commandName))
+            {
+                return false;
+            }
+            return GetCommand(commandName) != null;
+        }
+
+        
+        static string ParseCommandName(BotMessage message)
+        {
+            var msg = message.Content;
+            var commandName = msg.Split(" ")[0].Replace("/" ,"");
+            return commandName;
         }
         
     }

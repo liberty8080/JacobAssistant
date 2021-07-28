@@ -1,4 +1,4 @@
-using JacobAssistant.Bots.Messages;
+using JacobAssistant.Common.Models;
 
 namespace JacobAssistant.Services.Interfaces
 {
