@@ -16,9 +16,11 @@ namespace JacobAssistant.Services
         public bool CheckPermission(BotUser user,string commandName)
         {
             Log.Information($"Checking Permission... User:{user.UserName},Command:{commandName}");
-            return _dbContext.Permissions.Any(
-                item => item.UserId == user.UserId
-                        &&item.CommandName==commandName);
+            var result = from b in _dbContext.BotUsers
+                from p in _dbContext.Permissions
+                where b.UserId == user.UserId && p.UserId == b.Id
+                select p;
+            return result.Any();
         }
     }
 }

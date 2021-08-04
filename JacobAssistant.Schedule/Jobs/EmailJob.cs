@@ -37,7 +37,8 @@ namespace JacobAssistant.Schedule.Jobs
             }
             catch (Exception e)
             {
-                Log.Error("Email Job Execute Failed",e);
+                Log.Error("Email Job Execute Failed");
+                throw;
             }
 
             return Task.CompletedTask;

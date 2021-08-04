@@ -47,8 +47,10 @@ namespace JacobAssistant
 
             services.AddDbContext<ConfigurationDbContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("Mysql")));
-
-            services.AddSingleton<PermissionHandler,PermissionHandler>();
+            services.AddScoped<PermissionService, PermissionService>();
+            services.AddSingleton<PermissionHandler,PermissionHandler>(provider => new PermissionHandler( 
+                provider.CreateScope().ServiceProvider.GetService<PermissionService>())
+               );
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
             // 环境区分
             if (!_env.IsEnvironment("Development2"))
@@ -56,7 +58,7 @@ namespace JacobAssistant
                 Log.Information("trusted env , start AddBot");
                 services.AddBots(Configuration, _env);
                 //todo:待测试
-                services.AddSingleton<IAnnounceService, AssistantBotClient>();
+                // services.AddSingleton<IAnnounceService, AssistantBotClient>();
             }
 
             services.AddSingleton<WechatTokenHolder,WechatTokenHolder>();

@@ -94,6 +94,25 @@ jacob\\_aide|schema||aide||SHOW VIEW|G
 jacob\\_aide|schema||aide||TRIGGER|G
 jacob\\_aide|schema||aide||UPDATE|G
 jacob\\_aide|schema||aide||grant option|G
+mysql|schema||aide||ALTER|G
+mysql|schema||aide||ALTER ROUTINE|G
+mysql|schema||aide||CREATE|G
+mysql|schema||aide||CREATE ROUTINE|G
+mysql|schema||aide||CREATE TEMPORARY TABLES|G
+mysql|schema||aide||CREATE VIEW|G
+mysql|schema||aide||DELETE|G
+mysql|schema||aide||DROP|G
+mysql|schema||aide||EVENT|G
+mysql|schema||aide||EXECUTE|G
+mysql|schema||aide||INDEX|G
+mysql|schema||aide||INSERT|G
+mysql|schema||aide||LOCK TABLES|G
+mysql|schema||aide||REFERENCES|G
+mysql|schema||aide||SELECT|G
+mysql|schema||aide||SHOW VIEW|G
+mysql|schema||aide||TRIGGER|G
+mysql|schema||aide||UPDATE|G
+mysql|schema||aide||grant option|G
 performance_schema|schema||mysql.session|localhost|SELECT|G
 sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -987,89 +1006,175 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="283" parent="1" name="root"/>
-    <table id="284" parent="3" name="Configs"/>
-    <table id="285" parent="3" name="EmailAccounts"/>
-    <table id="286" parent="3" name="Logs"/>
-    <column id="287" parent="284" name="Id">
+    <table id="284" parent="3" name="BotUsers"/>
+    <table id="285" parent="3" name="Configs"/>
+    <table id="286" parent="3" name="EmailAccounts"/>
+    <table id="287" parent="3" name="EmailMessages"/>
+    <table id="288" parent="3" name="Logs"/>
+    <table id="289" parent="3" name="Permissions"/>
+    <column id="290" parent="284" name="Id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="288" parent="284" name="Name">
+    <column id="291" parent="284" name="UserId">
       <Position>2</Position>
-      <DataType>longtext|0s</DataType>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="292" parent="284" name="UserName">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="293" parent="284" name="Type">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="289" parent="284" name="Value">
-      <Position>3</Position>
-      <DataType>longtext|0s</DataType>
-    </column>
-    <key id="290" parent="284" name="PRIMARY">
+    <key id="294" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="291" parent="285" name="Id">
+    <column id="295" parent="285" name="Id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="292" parent="285" name="Email">
+    <column id="296" parent="285" name="Name">
       <Position>2</Position>
-      <DataType>longtext|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="293" parent="285" name="Password">
+    <column id="297" parent="285" name="Value">
       <Position>3</Position>
-      <DataType>longtext|0s</DataType>
+      <DataType>text|0s</DataType>
     </column>
-    <column id="294" parent="285" name="State">
-      <Position>4</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <column id="295" parent="285" name="Type">
-      <Position>5</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <key id="296" parent="285" name="PRIMARY">
+    <key id="298" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="297" parent="286" name="id">
+    <column id="299" parent="286" name="Id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="298" parent="286" name="Timestamp">
+    <column id="300" parent="286" name="Email">
       <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
+      <DataType>text|0s</DataType>
     </column>
-    <column id="299" parent="286" name="Level">
+    <column id="301" parent="286" name="Password">
       <Position>3</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>text|0s</DataType>
     </column>
-    <column id="300" parent="286" name="Message">
+    <column id="302" parent="286" name="State">
       <Position>4</Position>
-      <DataType>text|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
-    <column id="301" parent="286" name="Exception">
+    <column id="303" parent="286" name="Type">
       <Position>5</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="302" parent="286" name="Properties">
-      <Position>6</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="303" parent="286" name="_ts">
-      <Position>7</Position>
-      <DataType>timestamp|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
     <key id="304" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="305" parent="287" name="Id">
+      <Position>1</Position>
+      <DataType>varchar(767)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="306" parent="287" name="Subject">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="307" parent="287" name="Sender">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="308" parent="287" name="Date">
+      <Position>4</Position>
+      <DataType>timestamp|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="309" parent="287" name="Content">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="310" parent="287" name="Priority">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="311" parent="287" name="To">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <key id="312" parent="287" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="313" parent="288" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="314" parent="288" name="Timestamp">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="315" parent="288" name="Level">
+      <Position>3</Position>
+      <DataType>varchar(15)|0s</DataType>
+    </column>
+    <column id="316" parent="288" name="Message">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="317" parent="288" name="Exception">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="318" parent="288" name="Properties">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="319" parent="288" name="_ts">
+      <Position>7</Position>
+      <DataType>timestamp|0s</DataType>
+    </column>
+    <key id="320" parent="288" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="321" parent="289" name="Id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="322" parent="289" name="CommandName">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="323" parent="289" name="Permission">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="324" parent="289" name="UserId">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <key id="325" parent="289" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
   </database-model>

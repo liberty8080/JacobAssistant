@@ -24,11 +24,7 @@ namespace JacobAssistant.Bots.Messages
             var cmdName = ICommand.ParseCommandName(e.Message);
             if (!ICommand.IsCommand(cmdName)) return null;
             var check = _permissionService.CheckPermission(e.Message.From, cmdName);
-            if (check)
-            {
-                Next.Handle(e);
-            }
-            return null;
+            return check ? Next.Handle(sender,e) : new Result{Text = "permission denied"};
         }
     }
 }

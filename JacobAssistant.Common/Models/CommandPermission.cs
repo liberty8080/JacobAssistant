@@ -10,7 +10,7 @@ namespace JacobAssistant.Common.Models
         public string CommandName { get; set; }
         [Comment("0: disable, 1:enable")]
         public int Permission { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 
     public static class PermissionType

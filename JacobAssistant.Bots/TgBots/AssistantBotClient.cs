@@ -73,7 +73,7 @@ namespace JacobAssistant.Bots.TgBots
             }
             catch (Exception ex)
             {
-                Log.Error("command execute failed!", ex);
+                Log.Error($"command execute failed!\n{ex.StackTrace}");
                 ReplyMessage(e, ex.Message);
             }
         }
