@@ -25,7 +25,7 @@ namespace JacobAssistant.Services.Announce
         public void Announce(string message)
         {
             
-            
+            SendToUser(message,new BotUser{UserId = _options.WechatAnnounceChannelId});
         }
 
         public void SendToUser(string message, BotUser user)

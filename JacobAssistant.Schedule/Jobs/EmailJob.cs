@@ -31,6 +31,7 @@ namespace JacobAssistant.Schedule.Jobs
                     var text = mail.Content;
                     foreach (var announceService in _announceServices)
                     {
+                        //todo: 美化邮件格式
                         announceService.Announce(text);
                     }
                 }

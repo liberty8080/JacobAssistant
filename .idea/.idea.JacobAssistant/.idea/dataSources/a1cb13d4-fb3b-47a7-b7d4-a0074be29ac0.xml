@@ -1170,7 +1170,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="324" parent="289" name="UserId">
       <Position>4</Position>
-      <DataType>text|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
     <key id="325" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
