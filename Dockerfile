@@ -10,12 +10,12 @@ COPY ["JacobAssistant/JacobAssistant.csproj", "JacobAssistant/"]
 RUN dotnet restore "JacobAssistant/JacobAssistant.csproj"
 COPY . .
 WORKDIR "/src/JacobAssistant"
-RUN dotnet build "JacobAssistant.csproj" -c Release -o /app/build
+RUN dotnet build "JacobAssistant.Server/JacobAssistant.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "JacobAssistant.csproj" -c Release -o /app/publish
+RUN dotnet publish "JacobAssistant.Server/JacobAssistant.Server.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "JacobAssistant.dll"]
+ENTRYPOINT ["dotnet", "JacobAssistant.Server.dll"]
