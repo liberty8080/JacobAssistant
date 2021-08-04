@@ -6,8 +6,7 @@ ENV ASPNETCORE_URLS=http://+:5000
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["JacobAssistant/JacobAssistant.csproj", "JacobAssistant/"]
-RUN dotnet restore "JacobAssistant/JacobAssistant.csproj"
+
 COPY . .
 WORKDIR "/src/JacobAssistant"
 RUN dotnet build "JacobAssistant.Server/JacobAssistant.Server.csproj" -c Release -o /app/build
