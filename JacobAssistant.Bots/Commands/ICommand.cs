@@ -34,7 +34,7 @@ namespace JacobAssistant.Bots.Commands
                 throw new Exception("Command Name Can't Be Null!");
             }
             var cmd = GetCommands()
-                .First(item => item.Name.Replace("Command", "").ToUpper().Equals(name.ToUpper()));
+                .FirstOrDefault(item => item.Name.Replace("Command", "").ToUpper().Equals(name.ToUpper()));
             return cmd;
         }
 
