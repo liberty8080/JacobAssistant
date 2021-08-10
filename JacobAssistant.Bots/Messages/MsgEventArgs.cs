@@ -2,7 +2,7 @@ namespace JacobAssistant.Bots.Messages
 {
     public class MsgEventArgs
     {
-        public BotMessage Message { get; set; }
+        public BotMsgRequest MsgRequest { get; set; }
     }
 
     public enum MessageSource

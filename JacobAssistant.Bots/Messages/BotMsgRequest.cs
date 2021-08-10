@@ -4,7 +4,7 @@ using Telegram.Bot.Types;
 
 namespace JacobAssistant.Bots.Messages
 {
-    public class BotMessage
+    public class BotMsgRequest
     {
         public string MsgId { get; set; }
         public string Content { get; set; }
@@ -12,7 +12,7 @@ namespace JacobAssistant.Bots.Messages
         public DateTime Time { get; set; }
         public MessageSource MessageSource { get; set; }
 
-        public BotMessage(Message message)
+        public BotMsgRequest(Message message)
         {
             Content = message.Text;
             From = CastUser(message.From);

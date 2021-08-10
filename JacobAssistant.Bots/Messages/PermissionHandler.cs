@@ -21,9 +21,9 @@ namespace JacobAssistant.Bots.Messages
 
         public override IResult Handle<T>(T sender, MsgEventArgs e)
         {
-            var cmdName = ICommand.ParseCommandName(e.Message);
+            var cmdName = ICommand.ParseCommandName(e.MsgRequest);
             if (!ICommand.IsCommand(cmdName)) return null;
-            var check = _permissionService.CheckPermission(e.Message.From, cmdName);
+            var check = _permissionService.CheckPermission(e.MsgRequest.From, cmdName);
             return check ? Next.Handle(sender,e) : new Result{Text = "permission denied"};
         }
     }

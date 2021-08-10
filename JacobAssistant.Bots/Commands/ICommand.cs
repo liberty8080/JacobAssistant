@@ -53,9 +53,9 @@ namespace JacobAssistant.Bots.Commands
         }
 
         
-        static string ParseCommandName(BotMessage message)
+        static string ParseCommandName(BotMsgRequest msgRequest)
         {
-            var msg = message.Content;
+            var msg = msgRequest.Content;
             var commandName = msg.Split(" ")[0].Replace("/" ,"");
             return commandName;
         }

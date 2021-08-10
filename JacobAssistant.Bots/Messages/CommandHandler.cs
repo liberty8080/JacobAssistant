@@ -20,7 +20,7 @@ namespace JacobAssistant.Bots.Messages
 
         public override IResult Handle<T>(T sender, MsgEventArgs e)
         {
-            var msg = e.Message.Content;
+            var msg = e.MsgRequest.Content;
 
             if (!ICommand.IsCommand(msg[1..]))
             {
@@ -29,7 +29,7 @@ namespace JacobAssistant.Bots.Messages
             }
 
             Log.Information(
-                $"Received Command: \"{msg}\" from user: {e.Message.From.UserName}({e.Message.From.UserId})");
+                $"Received Command: \"{msg}\" from user: {e.MsgRequest.From.UserName}({e.MsgRequest.From.UserId})");
             var cmdStr = msg[1..];
             Log.Debug($"CmdStr: {cmdStr}");
             var command = ICommand.GetCommand(cmdStr);

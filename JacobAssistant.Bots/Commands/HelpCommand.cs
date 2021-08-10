@@ -23,7 +23,7 @@ namespace JacobAssistant.Bots.Commands
         public IResult Execute<T>(T sender, MsgEventArgs e)where T :IAnnounceService
         {
             string result = null;
-            Log.Debug($"Help Executed by {e.Message.From.UserId}");
+            Log.Debug($"Help Executed by {e.MsgRequest.From.UserId}");
             var commands = ICommand.GetCommands();
             foreach (var command in commands)
             {

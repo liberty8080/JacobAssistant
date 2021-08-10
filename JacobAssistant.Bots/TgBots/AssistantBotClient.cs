@@ -64,7 +64,7 @@ namespace JacobAssistant.Bots.TgBots
             
             var eventArgs = new MsgEventArgs
             {
-                Message = new BotMessage(e.Message)
+                MsgRequest = new BotMsgRequest(e.Message)
             };
             try
             {
