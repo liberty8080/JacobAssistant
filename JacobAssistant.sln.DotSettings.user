@@ -3,34 +3,34 @@
   &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Net.Mail.dll" /&gt;
   &lt;Assembly Path="/home/kylin/.nuget/packages/telegram.bot/16.0.2/lib/netstandard1.3/Telegram.Bot.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=056c2b77_002D159b_002D4725_002Db493_002Df7a73cdea78f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EmailTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigMappingTest.AllConfigKeys&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.ProviderTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetAndSetTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.LoadTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateConfigTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.OptionTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigurationTest.ConfTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigurationTest.OptionsTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Services.WechatTokenHolderTest.TokenTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Services.WechatAnnounceTest.AnnounceTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.MessageHandlersTest.HelpCommandTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=056c2b77_002D159b_002D4725_002Db493_002Df7a73cdea78f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EmailTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigMappingTest.AllConfigKeys&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.ProviderTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetAndSetTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.LoadTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateConfigTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.OptionTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigurationTest.ConfTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigurationTest.OptionsTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Services.WechatTokenHolderTest.TokenTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Services.WechatAnnounceTest.AnnounceTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.MessageHandlersTest.HelpCommandTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=384616a7_002D8bda_002D407b_002Dac3c_002D1bfc0c2d9d2f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ConfigServiceTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisClientTest.TestStart&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigMappingTest.AllConfigKeys&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetAndSetTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.LoadTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateConfigTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.OptionTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Services.WechatTokenHolderTest.TokenTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.MessageHandlersTest.HelpCommandTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=384616a7_002D8bda_002D407b_002Dac3c_002D1bfc0c2d9d2f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ConfigServiceTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisClientTest.TestStart&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.ConfigMappingTest.AllConfigKeys&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.RedisConfigurationProviderTest.TryGetAndSetTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.LoadTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.UpdateConfigTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Common.MysqlConfigurationProviderTest.OptionTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Services.WechatTokenHolderTest.TokenTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.MessageHandlersTest.HelpCommandTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=appsettings/@EntryIndexedValue">True</s:Boolean>
 	

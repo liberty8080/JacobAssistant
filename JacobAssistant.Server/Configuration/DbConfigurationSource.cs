@@ -60,28 +60,7 @@ namespace JacobAssistant.Configuration
             context.SaveChanges();
             // Data = configs.Any() ? ToDict(configs) : CreateAndSaveDefaultValues(context);
         }
-        /// <summary>
-        /// 修改数据库中的配置项，并刷新
-        /// todo:待实现
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public override void Set(string key, string value)
-        {
-            /*Log.Debug($"set {key} as {value}");
-            using var context = new ConfigurationDbContext(_connStr);
-            var config = context.Configs.FirstOrDefault(c => c.Name == key);
-            if (config == null)
-                config = new Config {Name = key, Value = value};
-            else
-                config.Value = value;
-            context.Configs.Update(config);
-            context.SaveChanges();
-            
-            Data.Clear();
-            Load();*/
-            base.Set(key,value);
-        }
+       
 
 
         /// <summary>
