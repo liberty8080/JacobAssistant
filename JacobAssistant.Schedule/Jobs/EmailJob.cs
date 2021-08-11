@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using JacobAssistant.Services.Email;
 using JacobAssistant.Services.Interfaces;
@@ -28,15 +29,18 @@ namespace JacobAssistant.Schedule.Jobs
                 var unreadMails = _service.GetUnreadMails();
                 foreach (var mail in unreadMails)
                 {
-                    var text = mail.Content;
                     foreach (var announceService in _announceServices)
                     {
-                        //todo: 美化邮件格式
-                        announceService.Announce(text);
+                        var sb = new StringBuilder();
+                        sb.Append($"Subject :{mail.Subject}\n");
+                        sb.Append($"From: {mail.Sender}\n");
+                        sb.Append($"Date: {mail.Date}\n");
+                        sb.Append(mail.Content);
+                        announceService.Announce(sb.ToString());
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Log.Error("Email Job Execute Failed");
                 throw;

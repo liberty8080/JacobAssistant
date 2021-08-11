@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using JacobAssistant.Common.Models;
 using MimeKit;
 using MimeKit.Text;
+using Serilog;
 
 namespace JacobAssistant.Services.Email
 {
@@ -28,17 +30,24 @@ namespace JacobAssistant.Services.Email
             foreach (var emailAccount in accounts)
             {
                 using var client = EmailClient(emailAccount);
-                IEnumerable<MimeMessage> unread;
+                IEnumerable<MimeMessage> unread = null;
                 try
                 {
                     unread = client.UnreadMails();
+                }
+                catch (SocketException)
+                {
+                    Log.Error($"Network Error! {emailAccount.Email} Can't Update");
                 }
                 catch (Exception e)
                 {
                     throw new EmailException("Unread Mails Fetch Failed ",e);
                 }
                 
-                foreach (var emailMessage in from mail in unread let query = _context.EmailMessages.Any(message => message.Id == mail.MessageId) where !query select new EmailMessage()
+                foreach (var emailMessage in from mail in unread 
+                    let query = _context.EmailMessages.Any(message => message.Id == mail.MessageId) 
+                    where !query 
+                    select new EmailMessage()
                 {
                     Id = mail.MessageId,
                     Subject = mail.Subject,
