@@ -23,7 +23,7 @@ namespace JacobAssistant.Schedule.Extensions
                                 q.AddTrigger(opt => opt
                                     .ForJob(jobKey)
                                     .WithIdentity("EmailJob-trigger")
-                                    .WithCronSchedule("0/30 * * * * ?"));
+                                    .WithCronSchedule("* 0/5 * * * ?"));
                             }
                         );
             return services;
