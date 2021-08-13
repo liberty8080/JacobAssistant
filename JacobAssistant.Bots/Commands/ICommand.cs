@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using JacobAssistant.Bots.Messages;
 using JacobAssistant.Services.Interfaces;
+using Microsoft.CodeAnalysis;
 using Serilog;
 using Telegram.Bot.Args;
 using Telegram.Bot.Requests;
@@ -27,6 +29,12 @@ namespace JacobAssistant.Bots.Commands
             return x;
         }
 
+        /// <summary>
+        /// Get ICommand Instance
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         static ICommand GetCommand(string name)
         {
             if (string.IsNullOrEmpty(name))
@@ -43,7 +51,7 @@ namespace JacobAssistant.Bots.Commands
         /// </summary>
         /// <param name="commandName"></param>
         /// <returns></returns>
-        static bool IsCommand(string commandName)
+        static bool HasCommand(string commandName)
         {
             if (string.IsNullOrEmpty(commandName))
             {
@@ -52,12 +60,34 @@ namespace JacobAssistant.Bots.Commands
             return GetCommand(commandName) != null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public bool IsCommand(string content)
+        {
+            return TryParseCommandName(content,out var commandName);
+        }
         
         static string ParseCommandName(BotMsgRequest msgRequest)
         {
             var msg = msgRequest.Content;
-            var commandName = msg.Split(" ")[0].Replace("/" ,"");
-            return commandName;
+            return TryParseCommandName(msg, out var commandName) ? commandName : null;
+        }
+
+        static bool TryParseCommandName(string content,out string commandName)
+        {
+            var isCommand = Regex.IsMatch(content,@"/[a-z]( [a-z])*");
+            
+            if (isCommand)
+            {
+                commandName = content.Split(" ")[0].Replace("/" ,"");
+                return true;
+            }
+
+            commandName = null;
+            return false;
         }
         
     }

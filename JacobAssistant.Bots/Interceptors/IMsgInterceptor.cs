@@ -1,4 +1,6 @@
-namespace JacobAssistant.Bots.Messages
+using JacobAssistant.Bots.Messages;
+
+namespace JacobAssistant.Bots.Interceptors
 {
     public interface IMsgInterceptor
     {

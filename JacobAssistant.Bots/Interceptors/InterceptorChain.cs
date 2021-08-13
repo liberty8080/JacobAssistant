@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
+using JacobAssistant.Bots.Messages;
 
-namespace JacobAssistant.Bots.Messages
+namespace JacobAssistant.Bots.Interceptors
 {
     public class InterceptorChain
     {

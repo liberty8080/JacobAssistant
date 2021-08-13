@@ -1,4 +1,5 @@
 using System;
+using JacobAssistant.Bots.Commands;
 using JacobAssistant.Common.Models;
 using Telegram.Bot.Types;
 
@@ -11,6 +12,15 @@ namespace JacobAssistant.Bots.Messages
         public BotUser From { get; set; }
         public DateTime Time { get; set; }
         public MessageSource MessageSource { get; set; }
+
+        public string Command
+        {
+            get
+            {
+                ICommand.TryParseCommandName(Content, out var commandName);
+                return commandName;
+            }
+        }
 
         public BotMsgRequest(Message message)
         {
@@ -30,5 +40,7 @@ namespace JacobAssistant.Bots.Messages
                 Type = UserType.Telegram
             };
         }
+        
+        
     }
 }
