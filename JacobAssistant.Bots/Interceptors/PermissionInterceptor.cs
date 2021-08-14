@@ -17,7 +17,7 @@ namespace JacobAssistant.Bots.Interceptors
         {
             var permitted = _service.CheckPermission(request.From, request.Command);
             if (permitted) return true;
-            response.Text = "Not Permitted";
+            response.Text = "Permission Denied";
             return false;
         }
 

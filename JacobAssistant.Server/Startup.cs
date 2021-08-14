@@ -57,8 +57,6 @@ namespace JacobAssistant
             {
                 Log.Information("trusted env , start AddBot");
                 services.AddBots(Configuration, _env);
-                //todo:待测试
-                // services.AddSingleton<IAnnounceService, AssistantBotClient>();
             }
 
             services.AddSingleton<WechatTokenHolder,WechatTokenHolder>();

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using JacobAssistant.Bots.Messages;
 using JacobAssistant.Services.Interfaces;
 using Serilog;
-using Telegram.Bot.Args;
 
 namespace JacobAssistant.Bots.Commands
 {
@@ -36,6 +34,28 @@ namespace JacobAssistant.Bots.Commands
             }
 
             return new Result {Text = result};
+        }
+
+        public void Execute(ref BotMsgRequest request, ref BotMsgResponse response)
+        {
+            string result = null;
+            try
+            {
+                Log.Information($"Help Command Executed By {request.From.UserName ?? request.From.UserId}");
+
+                var commands = ICommand.GetCommands();
+                foreach (var command in commands)
+                {
+                    result += $"/{command.Name} {command.Desc}\n";
+                }
+
+                response.Text = result;
+            }
+            catch (Exception)
+            {
+                response.Text = "Command Executed Failed";
+            }
+            
         }
     }
 }

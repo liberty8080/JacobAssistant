@@ -5,10 +5,6 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using JacobAssistant.Bots.Messages;
 using JacobAssistant.Services.Interfaces;
-using Microsoft.CodeAnalysis;
-using Serilog;
-using Telegram.Bot.Args;
-using Telegram.Bot.Requests;
 
 namespace JacobAssistant.Bots.Commands
 {
@@ -18,6 +14,8 @@ namespace JacobAssistant.Bots.Commands
         string Desc { get; set; }
         int Order { get; set; }
         IResult Execute<T>(T sender, MsgEventArgs e) where T:IAnnounceService;
+
+        void Execute(ref BotMsgRequest request,ref BotMsgResponse response);
 
         static IEnumerable<ICommand> GetCommands()
         {

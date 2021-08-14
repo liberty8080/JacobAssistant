@@ -1,7 +1,7 @@
-﻿using JacobAssistant.Bots.Messages;
+﻿using System;
+using JacobAssistant.Bots.Messages;
 using JacobAssistant.Services;
 using JacobAssistant.Services.Interfaces;
-using Telegram.Bot.Args;
 
 namespace JacobAssistant.Bots.Commands
 {
@@ -20,6 +20,25 @@ namespace JacobAssistant.Bots.Commands
         public IResult Execute<T>(T sender, MsgEventArgs e) where T:IAnnounceService
         {
             return new Result {Text = IpService.GetPublicIp()};
+        }
+
+        public void Execute(ref BotMsgRequest request, ref BotMsgResponse response)
+        {
+            try
+            {
+                var ip = IpService.GetPublicIp();
+                if (string.IsNullOrEmpty(ip))
+                {
+                    response.Text = "Can't Get Your IP";
+                    return;
+                }
+                response.Text = ip;
+            }
+            catch (Exception)
+            {
+                response.Text = "Execute Failed";
+            }
+            
         }
     }
 }

@@ -8,14 +8,12 @@ namespace JacobAssistant.Bots.Interceptors
     public class InterceptorChain
     {
 
-        //todo: Need Test
         private readonly List<IMsgInterceptor> _interceptorList;
         private int _index;
 
         
         public InterceptorChain(IEnumerable<IMsgInterceptor> interceptors)
         {
-            // _interceptorList.AddRange(interceptors);
             _interceptorList = interceptors.ToList();
             _index = _interceptorList.Count;
         }

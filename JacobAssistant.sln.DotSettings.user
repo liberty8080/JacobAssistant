@@ -21,6 +21,9 @@
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Services.EmailServiceTest.UnreadMailsTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.InterceptorTest.PreHandleTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.InterceptorTest.InterceptorChainTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.MessageHandlersTest.Dispatcher&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.MessageHandlersTest.DispatcherPermissionDeniedTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7988944A-ADCA-44C4-B625-F09ABDEC365C::net5.0::JacobAssistant.Tests.Bots.MessageHandlersTest.DispatchSuccessTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

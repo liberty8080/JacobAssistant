@@ -1,7 +1,7 @@
 using System;
-using JacobAssistant.Bots.Commands;
 using JacobAssistant.Common.Models;
 using Telegram.Bot.Types;
+using static JacobAssistant.Bots.Commands.ICommand;
 
 namespace JacobAssistant.Bots.Messages
 {
@@ -17,14 +17,13 @@ namespace JacobAssistant.Bots.Messages
         {
             get
             {
-                ICommand.TryParseCommandName(Content, out var commandName);
-                return commandName;
+                var parsed = TryParseCommandName(Content, out var commandName);
+                return parsed ? commandName : null;
             }
         }
 
         public BotMsgRequest()
         {
-            
         }
 
         public BotMsgRequest(string msgId, string content, BotUser @from, DateTime time, MessageSource messageSource)
@@ -35,6 +34,7 @@ namespace JacobAssistant.Bots.Messages
             Time = time;
             MessageSource = messageSource;
         }
+
         public BotMsgRequest(Message message)
         {
             Content = message.Text;
@@ -53,7 +53,5 @@ namespace JacobAssistant.Bots.Messages
                 Type = UserType.Telegram
             };
         }
-        
-        
     }
 }
