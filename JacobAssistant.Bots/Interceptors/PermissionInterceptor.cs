@@ -1,9 +1,10 @@
 using JacobAssistant.Bots.Messages;
 using JacobAssistant.Services;
+using Serilog;
 
 namespace JacobAssistant.Bots.Interceptors
 {
-    public class PermissionInterceptor:IMsgInterceptor
+    public class PermissionInterceptor : IMsgInterceptor
     {
         private readonly PermissionService _service;
 
@@ -11,14 +12,18 @@ namespace JacobAssistant.Bots.Interceptors
         {
             _service = service;
         }
+
         public bool PreHandle(ref BotMsgRequest request, ref BotMsgResponse response)
         {
-           return _service.CheckPermission(request.From,request.Command);
+            var permitted = _service.CheckPermission(request.From, request.Command);
+            if (permitted) return true;
+            response.Text = "Not Permitted";
+            return false;
         }
 
         public void AfterCompletion(ref BotMsgRequest request, ref BotMsgResponse response)
         {
-            throw new System.NotImplementedException();
+            Log.Information("Permit AfterCompletion , Do Nothing");
         }
     }
 }

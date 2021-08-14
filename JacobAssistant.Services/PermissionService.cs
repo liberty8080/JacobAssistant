@@ -13,7 +13,7 @@ namespace JacobAssistant.Services
             _dbContext = dbContext;
         }
 
-        public bool CheckPermission(BotUser user,string commandName)
+        public virtual bool CheckPermission(BotUser user,string commandName)
         {
             Log.Information($"Checking Permission... User:{user.UserName},Command:{commandName}");
             var result = from b in _dbContext.BotUsers

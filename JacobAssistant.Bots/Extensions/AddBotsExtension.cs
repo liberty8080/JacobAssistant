@@ -1,4 +1,5 @@
 ﻿using System;
+using JacobAssistant.Bots.Interceptors;
 using JacobAssistant.Bots.TgBots;
 using JacobAssistant.Common.Configuration;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,7 @@ namespace JacobAssistant.Bots.Extensions
             var botClient = provider.GetService<AssistantBotClient>();
             if (botClient == null) throw new ApplicationException("没有获取到Bot实例");
             botClient.Start();
+            service.AddSingleton<IMsgInterceptor, PermissionInterceptor>();
             return service;
         }
     }

@@ -1,21 +1,22 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using JacobAssistant.Bots.Messages;
 
 namespace JacobAssistant.Bots.Interceptors
 {
     public class InterceptorChain
     {
+
         //todo: Need Test
-        private List<IMsgInterceptor> _interceptorList;
+        private readonly List<IMsgInterceptor> _interceptorList;
         private int _index;
-        public InterceptorChain()
-        {
-            
-        }
+
         
         public InterceptorChain(IEnumerable<IMsgInterceptor> interceptors)
         {
-            _interceptorList.AddRange(interceptors);
+            // _interceptorList.AddRange(interceptors);
+            _interceptorList = interceptors.ToList();
             _index = _interceptorList.Count;
         }
 

@@ -16,7 +16,7 @@ namespace JacobAssistant.Tests
                 .CreateLogger();
             
             Configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.Development2.json")
+                .AddJsonFile("appsettings.Development.json")
                 .AddMyConfiguration()
                 .Build();
         }

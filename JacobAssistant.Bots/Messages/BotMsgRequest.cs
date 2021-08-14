@@ -22,6 +22,19 @@ namespace JacobAssistant.Bots.Messages
             }
         }
 
+        public BotMsgRequest()
+        {
+            
+        }
+
+        public BotMsgRequest(string msgId, string content, BotUser @from, DateTime time, MessageSource messageSource)
+        {
+            MsgId = msgId;
+            Content = content;
+            From = @from;
+            Time = time;
+            MessageSource = messageSource;
+        }
         public BotMsgRequest(Message message)
         {
             Content = message.Text;
