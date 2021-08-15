@@ -30,37 +30,45 @@ namespace JacobAssistant.Services.Email
             foreach (var emailAccount in accounts)
             {
                 using var client = EmailClient(emailAccount);
-                IEnumerable<MimeMessage> unread = null;
-                try
+
+                var unread = client.UnreadMails();
+
+                foreach (var mimeMessage in unread)
                 {
-                    unread = client.UnreadMails();
-                }
-                catch (SocketException)
-                {
-                    Log.Error($"Network Error! {emailAccount.Email} Can't Update");
-                }
-                catch (Exception e)
-                {
-                    throw new EmailException("Unread Mails Fetch Failed ",e);
-                }
-                
-                foreach (var emailMessage in from mail in unread 
-                    let query = _context.EmailMessages.Any(message => message.Id == mail.MessageId) 
-                    where !query 
-                    select new EmailMessage()
-                {
-                    Id = mail.MessageId,
-                    Subject = mail.Subject,
-                    Date = mail.Date,
-                    Content = mail.GetTextBody(TextFormat.Plain),
-                    Sender = mail.Sender==null?mail.From.ToString():mail.Sender.ToString(),
-                    Priority = mail.Priority.ToString(),
-                    To = mail.To.ToString()
-                })
-                {
-                    totalUnread.Add(emailMessage);
-                    _context.EmailMessages.Add(emailMessage);
-                    _context.SaveChanges();
+                    try
+                    {
+                        var query = _context.EmailMessages.Any(m => m.Id == mimeMessage.MessageId);
+                        if (!query)
+                        {
+                            var emailMessage = new EmailMessage
+                            {
+                                Id = mimeMessage.MessageId,
+                                Subject = mimeMessage.Subject,
+                                Date = mimeMessage.Date,
+                                Content = mimeMessage.GetTextBody(TextFormat.Plain),
+                                Sender = mimeMessage.Sender == null
+                                    ? mimeMessage.From.ToString()
+                                    : mimeMessage.Sender.ToString(),
+                                Priority = mimeMessage.Priority.ToString(),
+                                To = mimeMessage.To.ToString()
+                            };
+                            totalUnread.Add(emailMessage);
+                            _context.EmailMessages.Add(emailMessage);
+                            _context.SaveChanges();
+                        }
+                    }
+                    catch (SocketException)
+                    {
+                        Log.Error($"Network Error! {emailAccount.Email} Can't Update");
+                    }
+                    catch (MailKit.Security.SslHandshakeException)
+                    {
+                        Log.Error($"Network Error! {emailAccount.Email} Can't Update");
+                    }
+                    catch (Exception e)
+                    {
+                        throw new EmailException("Unread Mails Fetch Failed ", e);
+                    }
                 }
             }
 
@@ -69,7 +77,7 @@ namespace JacobAssistant.Services.Email
 
         private IEnumerable<EmailAccount> EmailAccounts()
         {
-            return _context.EmailAccounts.Where(account => account.State==(int)EmailAccountState.Active).ToList();
+            return _context.EmailAccounts.Where(account => account.State == (int) EmailAccountState.Active).ToList();
         }
 
         private static CustomEmailImapClient EmailClient(EmailAccount account)

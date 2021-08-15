@@ -11,10 +11,8 @@ namespace JacobAssistant.Schedule.Extensions
     {
         public static IServiceCollection AddEmailRemindJob(this IServiceCollection services)
         {
-            services.AddSingleton<EmailService,EmailService>(provider => new EmailService(
-                provider.CreateScope().ServiceProvider.GetService<ConfigurationDbContext>()));
-            /*services.AddSingleton<EmailAccountService, EmailAccountService>(provider => 
-                new EmailAccountService(provider.CreateScope().ServiceProvider.GetService<ConfigurationDbContext>()));*/
+
+            services.AddScoped<EmailService, EmailService>();
             services.AddQuartz(q =>
                             {
                                 q.UseMicrosoftDependencyInjectionScopedJobFactory();
@@ -24,6 +22,7 @@ namespace JacobAssistant.Schedule.Extensions
                                     .ForJob(jobKey)
                                     .WithIdentity("EmailJob-trigger")
                                     .WithCronSchedule("* 0/5 * * * ?"));
+                                    
                             }
                         );
             return services;

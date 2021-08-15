@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using JacobAssistant.Services.Email;
@@ -9,6 +10,7 @@ using Serilog;
 
 namespace JacobAssistant.Schedule.Jobs
 {
+    [DisallowConcurrentExecution]
     public class EmailJob : IJob
     {
         private readonly IEnumerable<IAnnounceService> _announceServices;
@@ -38,10 +40,13 @@ namespace JacobAssistant.Schedule.Jobs
                     }
                 }
             }
-            catch (Exception)
+            catch (IOException)
             {
-                Log.Error("Email Job Execute Failed");
-                throw;
+                Log.Error("NetworkError in fetching Email");
+            }
+            catch (Exception e)
+            {
+                Log.Error(e,"Email Job Execute Failed");
             }
 
             return Task.CompletedTask;
