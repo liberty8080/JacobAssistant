@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using JacobAssistant.Common.Models;
 using Serilog;
@@ -13,14 +14,24 @@ namespace JacobAssistant.Services
             _dbContext = dbContext;
         }
 
-        public virtual bool CheckPermission(BotUser user,string commandName)
+        public virtual bool CheckPermission(BotUser user, string commandName)
         {
-            Log.Information($"Checking Permission... User:{user.UserName},Command:{commandName}");
-            var result = from b in _dbContext.BotUsers
-                from p in _dbContext.Permissions
-                where b.UserId == user.UserId && p.UserId == b.Id
+            Log.Information($"Checking Permission... ");
+            var query = from b in _dbContext.BotUsers.Where(item => item.UserId == user.UserId)
+                from p in _dbContext.Permissions.Where(item => item.CommandName == commandName)
+                where b.Id == p.UserId && p.Permission == 1
                 select p;
-            return result.Any();
+
+            if (query.Any())
+            {
+                Log.Information($"Permission Passed User:{user.UserName},Command:{commandName}");
+                return true;
+            }
+            else
+            {
+                Log.Information($"Permission Denied！User:{user.UserName},Command:{commandName}");
+                return false;
+            }
         }
     }
 }

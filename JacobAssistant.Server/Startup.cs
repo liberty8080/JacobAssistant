@@ -48,9 +48,7 @@ namespace JacobAssistant
             services.AddDbContext<ConfigurationDbContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("Mysql")));
             services.AddScoped<PermissionService, PermissionService>();
-            services.AddSingleton<PermissionHandler,PermissionHandler>(provider => new PermissionHandler( 
-                provider.CreateScope().ServiceProvider.GetService<PermissionService>())
-               );
+            
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
             // 环境区分
             if (!_env.IsEnvironment("Development2"))

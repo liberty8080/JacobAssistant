@@ -13,7 +13,7 @@ namespace JacobAssistant.Bots.Commands
         string Name { get; set; }
         string Desc { get; set; }
         int Order { get; set; }
-        IResult Execute<T>(T sender, MsgEventArgs e) where T:IAnnounceService;
+
 
         void Execute(ref BotMsgRequest request,ref BotMsgResponse response);
 

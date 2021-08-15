@@ -8,17 +8,18 @@ using Serilog;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+using Ubiety.Dns.Core;
 
 namespace JacobAssistant.Bots.TgBots
 {
     public class AssistantBotClient : IAnnounceService
     {
-        private readonly PermissionHandler _permissionHandler;
+        private readonly IMessageDispatcher _dispatcher;
 
-        public AssistantBotClient(BotOptions options,
-            PermissionHandler permissionHandler)
+        public AssistantBotClient(BotOptions options, IMessageDispatcher dispatcher)
         {
-            _permissionHandler = permissionHandler;
+            _dispatcher = dispatcher;
             Options = options;
         }
 
@@ -58,24 +59,20 @@ namespace JacobAssistant.Bots.TgBots
 
         private void OnMessage(object sender, MessageEventArgs e)
         {
+
+            if (e.Message.Type != MessageType.Text) return;
+            var request = new BotMsgRequest(e.Message);
             
-            IMessageHandler command = new CommandHandler();
-            _permissionHandler.SetNext(command);
-            
-            var eventArgs = new MsgEventArgs
+            var response = new BotMsgResponse
             {
-                MsgRequest = new BotMsgRequest(e.Message)
+                ContentType = ResponseContentType.PlainText,
+                Source = MessageSource.Telegram,
+                To = request.From
             };
-            try
-            {
-                var result = _permissionHandler.Handle(this, eventArgs);
-                ReplyMessage(e, result.Text);
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"command execute failed!\n{ex.StackTrace}");
-                ReplyMessage(e, ex.Message);
-            }
+            _dispatcher.DoDispatch(ref request,ref response);
+            
+            SendMessage(long.Parse(response.To.UserId),response.Text);
+
         }
 
 

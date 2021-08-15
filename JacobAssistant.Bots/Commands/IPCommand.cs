@@ -17,10 +17,7 @@ namespace JacobAssistant.Bots.Commands
         public string Desc { get; set; }
         public int Order { get; set; }
 
-        public IResult Execute<T>(T sender, MsgEventArgs e) where T:IAnnounceService
-        {
-            return new Result {Text = IpService.GetPublicIp()};
-        }
+
 
         public void Execute(ref BotMsgRequest request, ref BotMsgResponse response)
         {
