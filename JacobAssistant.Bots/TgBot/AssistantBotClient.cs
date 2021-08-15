@@ -2,16 +2,14 @@
 using System.Threading.Tasks;
 using JacobAssistant.Bots.Messages;
 using JacobAssistant.Common.Models;
-using JacobAssistant.Services;
 using JacobAssistant.Services.Interfaces;
 using Serilog;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Ubiety.Dns.Core;
 
-namespace JacobAssistant.Bots.TgBots
+namespace JacobAssistant.Bots.TgBot
 {
     public class AssistantBotClient : IAnnounceService
     {

@@ -31,9 +31,7 @@ namespace JacobAssistant.Tests.Common
             _provider.Load();
         }
 
-        /// <summary>
-        /// todo: 配置热更新待实现
-        /// </summary>
+
         [Test]
         public void UpdateTest()
         {

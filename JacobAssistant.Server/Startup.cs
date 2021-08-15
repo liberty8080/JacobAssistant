@@ -1,12 +1,7 @@
-using System;
 using JacobAssistant.Bots.Extensions;
-using JacobAssistant.Bots.Messages;
-using JacobAssistant.Bots.TgBots;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Common.Models;
-using JacobAssistant.Extension;
 using JacobAssistant.Schedule.Extensions;
-using JacobAssistant.Schedule.Jobs;
 using JacobAssistant.Services;
 using JacobAssistant.Services.Announce;
 using JacobAssistant.Services.Interfaces;
@@ -19,8 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Quartz;
-using Quartz.Impl;
-using Quartz.Spi;
 using Serilog;
 
 namespace JacobAssistant

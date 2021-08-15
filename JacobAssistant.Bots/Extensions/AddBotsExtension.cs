@@ -1,7 +1,7 @@
 ﻿using System;
 using JacobAssistant.Bots.Interceptors;
 using JacobAssistant.Bots.Messages;
-using JacobAssistant.Bots.TgBots;
+using JacobAssistant.Bots.TgBot;
 using JacobAssistant.Common.Configuration;
 using JacobAssistant.Services;
 using Microsoft.Extensions.Configuration;

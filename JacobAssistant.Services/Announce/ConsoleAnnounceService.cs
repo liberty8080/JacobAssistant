@@ -13,7 +13,6 @@ namespace JacobAssistant.Services.Announce
 
         public void SendToUser(string message, BotUser user)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -9,7 +9,6 @@ namespace JacobAssistant.Configuration
 {
     /// <summary>
     /// redis 配置源
-    /// todo: 修改为options实现
     /// </summary>
     public class RedisConfigurationSource : IConfigurationSource
     {
