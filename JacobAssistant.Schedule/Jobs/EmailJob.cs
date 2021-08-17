@@ -24,6 +24,7 @@ namespace JacobAssistant.Schedule.Jobs
 
         public Task Execute(IJobExecutionContext context)
         {
+            //todo: add Email Processor
             try
             {
                 var unreadMails = _service.GetUnreadMails();

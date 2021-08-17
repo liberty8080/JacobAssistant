@@ -22,32 +22,32 @@ namespace JacobAssistant.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
-        public IDictionary<string, string> GetAll()
-        {
-            return _configuration.AsEnumerable()
-                .ToDictionary(item => item.Key, item => item.Value);
-        }
-
-        /*private readonly ConfigService _service;
-
-        public ConfigController(ConfigService service)
-        {
-            _service = service;
-        }
-
-        // GET: api/ConfigController
-        [HttpGet]
-        public IEnumerable<Config> Get()
-        {
-            return _service.GetAll();
-        }
-
-        // GET: api/ConfigController/{name}
-        [HttpGet("{name}", Name = "Get")]
-        public Config Get(String name)
-        {
-            return _service.GetConfig(name);
-        }*/
+        /* [HttpGet]
+         public IDictionary<string, string> GetAll()
+         {
+             return _configuration.AsEnumerable()
+                 .ToDictionary(item => item.Key, item => item.Value);
+         }
+ 
+         private readonly ConfigService _service;
+ 
+         public ConfigController(ConfigService service)
+         {
+             _service = service;
+         }
+ 
+         // GET: api/ConfigController
+         [HttpGet]
+         public IEnumerable<Config> Get()
+         {
+             return _service.GetAll();
+         }
+ 
+         // GET: api/ConfigController/{name}
+         [HttpGet("{name}", Name = "Get")]
+         public Config Get(String name)
+         {
+             return _service.GetConfig(name);
+         }*/
     }
 }

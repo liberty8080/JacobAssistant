@@ -17,6 +17,7 @@ namespace JacobAssistant.Common.Configuration
         public string WechatCorpId { get; set; }
         public string WechatAppSecret { get; set; }
         public string WechatAppId { get; set; }
-        
+        public string WechatAppToken { get; set; }
+        public string WechatAppAESKey { get; set; }
     }
 }
