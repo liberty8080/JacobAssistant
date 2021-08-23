@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JacobAssistant.Common.Configuration;
 using JacobAssistant.Common.Models;
 using JacobAssistant.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace JacobAssistant.Controllers
 {
@@ -15,11 +17,11 @@ namespace JacobAssistant.Controllers
     [ApiController]
     public class ConfigController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        private readonly AppOptions _options;
 
-        public ConfigController(IConfiguration configuration)
+        public ConfigController(IOptions<AppOptions> options)
         {
-            _configuration = configuration;
+            _options = options.Value;
         }
 
         /* [HttpGet]

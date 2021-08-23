@@ -21,6 +21,7 @@ namespace JacobAssistant.Common.Util
         string m_sToken;
         string m_sEncodingAESKey;
         string m_sReceiveId;
+
         enum WXBizMsgCryptErrorCode
         {
             WXBizMsgCrypt_OK = 0,
@@ -37,9 +38,9 @@ namespace JacobAssistant.Common.Util
         };
 
         //构造函数
-	    // @param sToken: 企业微信后台，开发者设置的Token
-	    // @param sEncodingAESKey: 企业微信后台，开发者设置的EncodingAESKey
-	    // @param sReceiveId: 不同场景含义不同，详见文档说明
+        // @param sToken: 企业微信后台，开发者设置的Token
+        // @param sEncodingAESKey: 企业微信后台，开发者设置的EncodingAESKey
+        // @param sReceiveId: 不同场景含义不同，详见文档说明
         public WXBizMsgCrypt(string sToken, string sEncodingAESKey, string sReceiveId)
         {
             m_sToken = sToken;
@@ -54,18 +55,21 @@ namespace JacobAssistant.Common.Util
         // @param sEchoStr: 随机串，对应URL参数的echostr
         // @param sReplyEchoStr: 解密之后的echostr，当return返回0时有效
         // @return：成功0，失败返回对应的错误码
-        public int VerifyURL(string sMsgSignature, string sTimeStamp, string sNonce, string sEchoStr, ref string sReplyEchoStr)
+        public int VerifyURL(string sMsgSignature, string sTimeStamp, string sNonce, string sEchoStr,
+            ref string sReplyEchoStr)
         {
             int ret = 0;
-			if (m_sEncodingAESKey.Length!=43)
-			{
-				return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_IllegalAesKey;
-			}
+            if (m_sEncodingAESKey.Length != 43)
+            {
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_IllegalAesKey;
+            }
+
             ret = VerifySignature(m_sToken, sTimeStamp, sNonce, sEchoStr, sMsgSignature);
             if (0 != ret)
             {
                 return ret;
             }
+
             sReplyEchoStr = "";
             string cpid = "";
             try
@@ -75,13 +79,15 @@ namespace JacobAssistant.Common.Util
             catch (Exception)
             {
                 sReplyEchoStr = "";
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_DecryptAES_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_DecryptAES_Error;
             }
+
             if (cpid != m_sReceiveId)
             {
                 sReplyEchoStr = "";
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_ValidateCorpid_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_ValidateCorpid_Error;
             }
+
             return 0;
         }
 
@@ -94,10 +100,11 @@ namespace JacobAssistant.Common.Util
         // @return: 成功0，失败返回对应的错误码
         public int DecryptMsg(string sMsgSignature, string sTimeStamp, string sNonce, string sPostData, ref string sMsg)
         {
-			if (m_sEncodingAESKey.Length!=43)
-			{
-				return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_IllegalAesKey;
-			}
+            if (m_sEncodingAESKey.Length != 43)
+            {
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_IllegalAesKey;
+            }
+
             XmlDocument doc = new XmlDocument();
             XmlNode root;
             string sEncryptMsg;
@@ -109,8 +116,9 @@ namespace JacobAssistant.Common.Util
             }
             catch (Exception)
             {
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_ParseXml_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_ParseXml_Error;
             }
+
             //verify signature
             int ret = 0;
             ret = VerifySignature(m_sToken, sTimeStamp, sNonce, sEncryptMsg, sMsgSignature);
@@ -125,15 +133,16 @@ namespace JacobAssistant.Common.Util
             catch (FormatException)
             {
                 sMsg = "";
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_DecodeBase64_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_DecodeBase64_Error;
             }
             catch (Exception)
             {
                 sMsg = "";
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_DecryptAES_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_DecryptAES_Error;
             }
+
             if (cpid != m_sReceiveId)
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_ValidateCorpid_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_ValidateCorpid_Error;
             return 0;
         }
 
@@ -146,10 +155,11 @@ namespace JacobAssistant.Common.Util
         // return：成功0，失败返回对应的错误码
         public int EncryptMsg(string sReplyMsg, string sTimeStamp, string sNonce, ref string sEncryptMsg)
         {
-			if (m_sEncodingAESKey.Length!=43)
-			{
-				return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_IllegalAesKey;
-			}
+            if (m_sEncodingAESKey.Length != 43)
+            {
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_IllegalAesKey;
+            }
+
             string raw = "";
             try
             {
@@ -157,8 +167,9 @@ namespace JacobAssistant.Common.Util
             }
             catch (Exception)
             {
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_EncryptAES_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_EncryptAES_Error;
             }
+
             string MsgSigature = "";
             int ret = 0;
             ret = GenarateSinature(m_sToken, sTimeStamp, sNonce, raw, ref MsgSigature);
@@ -200,12 +211,14 @@ namespace JacobAssistant.Common.Util
                     else
                         index++;
                 }
-                return iLeftLength - iRightLength;
 
+                return iLeftLength - iRightLength;
             }
         }
+
         //Verify Signature
-        private static int VerifySignature(string sToken, string sTimeStamp, string sNonce, string sMsgEncrypt, string sSigture)
+        private static int VerifySignature(string sToken, string sTimeStamp, string sNonce, string sMsgEncrypt,
+            string sSigture)
         {
             string hash = "";
             int ret = 0;
@@ -216,11 +229,12 @@ namespace JacobAssistant.Common.Util
                 return 0;
             else
             {
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_ValidateSignature_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_ValidateSignature_Error;
             }
         }
 
-        public static int GenarateSinature(string sToken, string sTimeStamp, string sNonce, string sMsgEncrypt ,ref string sMsgSignature)
+        public static int GenarateSinature(string sToken, string sTimeStamp, string sNonce, string sMsgEncrypt,
+            ref string sMsgSignature)
         {
             ArrayList AL = new ArrayList();
             AL.Add(sToken);
@@ -248,8 +262,9 @@ namespace JacobAssistant.Common.Util
             }
             catch (Exception)
             {
-                return (int)WXBizMsgCryptErrorCode.WXBizMsgCrypt_ComputeSignature_Error;
+                return (int) WXBizMsgCryptErrorCode.WXBizMsgCrypt_ComputeSignature_Error;
             }
+
             sMsgSignature = hash;
             return 0;
         }
