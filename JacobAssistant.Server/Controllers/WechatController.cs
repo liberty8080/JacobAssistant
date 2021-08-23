@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using JacobAssistant.Common.Util;
+using JacobAssistant.Services.Wechat;
 
 namespace JacobAssistant.Controllers
 {
@@ -7,11 +9,18 @@ namespace JacobAssistant.Controllers
     [ApiController]
     public class WechatController
     {
-        [HttpGet]
-        public string Verify()
+        private readonly WechatCryptographyService _cryptographyService;
+
+        public WechatController(WechatCryptographyService cryptographyService)
         {
-            //todo:WebHook加解密
-            throw new NotImplementedException();
+            _cryptographyService = cryptographyService;
         }
+        [HttpGet("wechat_verify")]
+        public string CallBack(string msg_signature,int timestamp ,string nonce,string echostr)
+        {
+          return  _cryptographyService.VerifyUrl(msg_signature, timestamp, nonce, echostr);
+        }
+        
+        
     }
 }

@@ -41,7 +41,7 @@ namespace JacobAssistant
             services.AddDbContext<ConfigurationDbContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("Mysql")));
             services.AddScoped<PermissionService, PermissionService>();
-            
+            services.AddScoped<WechatCryptographyService>();
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.App));
             // 环境区分
             if (!_env.IsEnvironment("Development2"))
@@ -67,7 +67,7 @@ namespace JacobAssistant
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JacobAssistant.Server v1"));
             }
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
