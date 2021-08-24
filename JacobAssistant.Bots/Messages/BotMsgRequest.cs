@@ -34,7 +34,7 @@ namespace JacobAssistant.Bots.Messages
             Time = time;
             MessageSource = messageSource;
         }
-
+        
         public BotMsgRequest(Message message)
         {
             Content = message.Text;

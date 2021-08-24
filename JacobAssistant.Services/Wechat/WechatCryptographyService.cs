@@ -35,5 +35,13 @@ namespace JacobAssistant.Services.Wechat
             }
             return rMsg;
         }
+
+        public string Encrypt(string sReplyMsg, string sTimeStamp, string sNonce)
+        {
+            var msgCrypt = new WXBizMsgCrypt(_options.WechatAppToken, _options.WechatAppAESKey, _options.WechatCorpId);
+            var response="";
+            msgCrypt.EncryptMsg(sReplyMsg,sTimeStamp,sNonce,ref response);
+            return response;
+        }
     }
 }
