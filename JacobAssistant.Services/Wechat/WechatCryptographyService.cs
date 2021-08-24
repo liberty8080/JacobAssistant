@@ -24,11 +24,11 @@ namespace JacobAssistant.Services.Wechat
             return result;
         }
 
-        public string Decrypt(string sMsgSignature, int sTimeStamp, string sNonce, string sPostData)
+        public string Decrypt(string sMsgSignature, string sTimeStamp, string sNonce, string sPostData)
         {
             var msgCrypt = new WXBizMsgCrypt(_options.WechatAppToken, _options.WechatAppAESKey, _options.WechatCorpId);
             var rMsg = "";
-            var code =msgCrypt.DecryptMsg(sMsgSignature,sTimeStamp.ToString(),sNonce,sPostData,ref rMsg);
+            var code =msgCrypt.DecryptMsg(sMsgSignature,sTimeStamp,sNonce,sPostData,ref rMsg);
             if (code != 0)
             {
                 throw new ApplicationException($"wechatMsg Decrypt Failed! Error Code: {code}");

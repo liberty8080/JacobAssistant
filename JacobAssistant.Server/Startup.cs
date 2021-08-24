@@ -48,7 +48,8 @@ namespace JacobAssistant
                 Log.Information("trusted env , start AddBot");
                 services.AddBots(Configuration, _env);
             }
-            
+
+            // services.AddMvcCore().AddXmlSerializerFormatters();
             services.AddSingleton<WechatCryptographyService>();
             services.AddSingleton<WechatTokenHolder,WechatTokenHolder>();
             services.AddSingleton<IAnnounceService, WechatAnnounceService>();
