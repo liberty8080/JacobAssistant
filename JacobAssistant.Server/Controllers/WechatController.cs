@@ -57,7 +57,7 @@ namespace JacobAssistant.Controllers
 
         private void DispatchMsg(ref string msg)
         {
-            var doc = new XmlDocument();
+            /*var doc = new XmlDocument();
             doc.LoadXml(msg);
             var request = new BotMsgRequest();
             var msgType = "";
@@ -75,24 +75,31 @@ namespace JacobAssistant.Controllers
             catch (Exception)
             {
                 throw new ApplicationException("解析微信消息失败！");
-            }
-            
+            }*/
+            var request = BotMsgRequest.ParseFromWechat(msg);
             var response = new BotMsgResponse
             {
                 Source = MessageSource.Wechat,ContentType = ResponseContentType.PlainText,
                 To = request.From
             };
             
-
-            if (msgType == "text")
+            if (request.ContentType == RequestContentType.Text)
             {
                 _dispatcher.DoDispatch(ref request, ref response);
-                msg = response.Text;
+                /*var doc = new XmlDocument();
+                doc.LoadXml(msg);
+                doc.DocumentElement["Content"].InnerText = response.Text;
+                msg = doc.InnerXml;*/
+                ApplyContentChange(ref msg,response.Text);
             }
-            else
-            {
-                msg = "暂不支持";
-            }
+        }
+
+        private void ApplyContentChange(ref string msg,string content)
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(msg);
+            doc.DocumentElement["Content"].InnerText = content;
+            msg = doc.InnerXml;
         }
     }
 }
