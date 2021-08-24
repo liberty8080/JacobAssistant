@@ -17,7 +17,7 @@ namespace JacobAssistant.Controllers
         }
 
         [HttpGet]
-        public string VerifyUrl(string msg_signature, int timestamp, string nonce, string echostr)
+        public string VerifyUrl(string msg_signature, string timestamp, string nonce, string echostr)
         {
             return _cryptographyService.VerifyUrl(msg_signature, timestamp, nonce, echostr);
         }

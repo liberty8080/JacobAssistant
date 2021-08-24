@@ -15,12 +15,12 @@ namespace JacobAssistant.Services.Wechat
             _options = options.Value;
         }
 
-        public string VerifyUrl(string msgSignature, int timestamp, string nonce, string echostr)
+        public string VerifyUrl(string msgSignature, string timestamp, string nonce, string echostr)
         {
             var msgCrypt =
                 new WXBizMsgCrypt(_options.WechatAppToken, _options.WechatAppAESKey, _options.WechatCorpId);
             var result = "";
-            msgCrypt.VerifyURL(msgSignature, timestamp.ToString(), nonce, echostr, ref result);
+            msgCrypt.VerifyURL(msgSignature, timestamp, nonce, echostr, ref result);
             return result;
         }
 
