@@ -11,8 +11,8 @@ using Ubiety.Dns.Core;
 namespace JacobAssistant.Controllers
 {
     [Route("api/[controller]")]
-    // [ApiController]
-    public class WechatController:Controller
+    [ApiController]
+    public class WechatController:ControllerBase
     {
         private readonly WechatCryptographyService _cryptographyService;
 
