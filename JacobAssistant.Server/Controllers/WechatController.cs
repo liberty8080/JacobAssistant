@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 using JacobAssistant.Bots.Messages;
-using JacobAssistant.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using JacobAssistant.Services.Wechat;
 
@@ -57,25 +55,6 @@ namespace JacobAssistant.Controllers
 
         private void DispatchMsg(ref string msg)
         {
-            /*var doc = new XmlDocument();
-            doc.LoadXml(msg);
-            var request = new BotMsgRequest();
-            var msgType = "";
-            try
-            {
-                //process request
-                var from = doc.DocumentElement["FromUserName"].InnerText;
-                msgType = doc.DocumentElement["MsgType"].InnerText;
-                request.MessageSource = MessageSource.Wechat;
-                request.Content = doc.DocumentElement["Content"].InnerText;
-                request.Time = DateTime.Now;
-                request.MsgId = doc.DocumentElement["MsgId"].InnerText;
-                request.From = new BotUser {UserName = from, UserId = from, Type = 1};
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("解析微信消息失败！");
-            }*/
             var request = BotMsgRequest.ParseFromWechat(msg);
             var response = new BotMsgResponse
             {
@@ -86,10 +65,6 @@ namespace JacobAssistant.Controllers
             if (request.ContentType == RequestContentType.Text)
             {
                 _dispatcher.DoDispatch(ref request, ref response);
-                /*var doc = new XmlDocument();
-                doc.LoadXml(msg);
-                doc.DocumentElement["Content"].InnerText = response.Text;
-                msg = doc.InnerXml;*/
                 ApplyContentChange(ref msg,response.Text);
             }
         }
